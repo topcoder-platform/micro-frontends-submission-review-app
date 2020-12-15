@@ -1,0 +1,10 @@
+version: '3'
+services:
+  micro-frontends-submission-review-app:
+    image: micro-frontends-submission-review-app:latest
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    env_file:
+      - api.env
+    network_mode: "host"

@@ -4,7 +4,7 @@
  * Page for the Details of Challenges.
  */
 import React from "react";
-import LayoutContainer from "components/LayoutContainer";
+import LayoutContainer from "../../components/LayoutContainer";
 import ChallengeDetailsHeader from "./components/ChallengeDetailsHeader";
 import ChallengeProgress from "./components/ChallengeProgress";
 import { useData } from "../../hooks/useData";

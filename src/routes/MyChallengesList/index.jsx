@@ -4,12 +4,12 @@
  * Page for the list of challenges.
  */
 import React, { useState } from "react";
-import LayoutContainer from "components/LayoutContainer";
-import PageHeader from "components/PageHeader";
+import LayoutContainer from "../../components/LayoutContainer";
+import PageHeader from "../../components/PageHeader";
 import ChallengesContainer from "./components/ChallengesContainer";
 import { useData } from "../../hooks/useData";
 import { getMyChallenges } from "../../services/challenges";
-import ChallengesHeader from "components/ChallengesHeader";
+import ChallengesHeader from "../../components/ChallengesHeader";
 import ChallengesList from "./components/ChallengesList";
 import LoadingIndicator from "../../components/LoadingIndicator";
 

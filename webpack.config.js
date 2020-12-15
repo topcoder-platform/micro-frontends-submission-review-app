@@ -9,12 +9,16 @@ const cssLocalIdent = "sr_[path][name]___[local]___[hash:base64:6]";
 module.exports = (webpackConfigEnv) => {
   const defaultConfig = singleSpaDefaults({
     orgName: "topcoder",
-    projectName: "submission-review-app",
+    projectName: "micro-frontends-submission-review-app",
     webpackConfigEnv,
   });
 
   return webpackMerge.smart(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
+    externals: {
+      "@topcoder/micro-frontends-navbar-app":
+        "@topcoder/micro-frontends-navbar-app",
+    },
     module: {
       rules: [
         {
