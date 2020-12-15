@@ -1,0 +1,98 @@
+@import "styles/include";
+
+.challenge-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 16px 25px;
+  background-color: white;
+  margin: 0px -35px;
+}
+
+.title-back-wrapper {
+  display: flex;
+  justify-content: flex-start;
+
+  .back-btn {
+    display: none;
+  }
+
+  .title-tag-wrapper {
+    align-items: center;
+    display: grid;
+    margin-right: 32px;
+    padding: 16px 0;
+  
+    .tags-wrapper {
+      display: flex;
+      justify-content: flex-start;
+  
+      .tag-wrapper {
+        margin: 5px 8px 0px 0px;
+        background-color: #e9e9e9;
+        padding: 6px;
+        font-size: small;
+        font-weight: 500;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+.challenge-role {
+  .role {
+    margin-right: 15px;
+    margin-top: 30px;
+    border: 2px black solid;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+}
+
+.challenge-title {
+  font-weight: 500;
+  margin: 0;
+  overflow-wrap: anywhere;
+  padding: 0;
+}
+
+.back-to {
+  align-items: center;
+  display: flex;
+  border-right: 1px solid #D4D4D4;
+  height: 40px;
+  margin-right: 16px;
+  padding-right: 16px;
+}
+
+@media (max-width: 1023px) {
+  .challenge-header {
+    .title-back-wrapper {
+      .back-btn {
+        display: inline;
+        margin: auto;
+        margin-right: 20px;
+
+        .back-btn-svg {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .challenge-header {
+    margin: 0px -10px;
+  }
+}
+
+@media (max-width: 374px) {
+  .challenge-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

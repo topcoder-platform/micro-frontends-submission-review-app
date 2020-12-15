@@ -1,0 +1,395 @@
+@import "styles/include";
+
+.challenge-list-container {
+    display: grid;
+}
+
+
+.challenge-list-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #d5d5d5;
+
+    .challenge-title {
+        display: flex;
+        flex: 2;
+        justify-content: flex-start;
+
+        .challenge-logo {
+            margin: 19px;
+
+            &.logo-dev {
+                .logo-upper {
+                    display: flex;
+                    justify-content: center;
+                    background-color: #4d8833;
+                    color: white;
+                    padding: 4px;
+                }
+    
+                .logo-lower {
+                    font-size: small;
+                    font-weight: bold;
+                    display: flex;
+                    justify-content: center;
+                    background-color: #effae4;
+                    color: #4d8833;
+                    padding: 4px;
+                }
+            }
+
+            &.logo-design {
+                .logo-upper {
+                    display: flex;
+                    justify-content: center;
+                    background-color: #3677a5;
+                    color: white;
+                    padding: 4px;
+                }
+    
+                .logo-lower {
+                    font-size: small;
+                    font-weight: bold;
+                    display: flex;
+                    justify-content: center;
+                    background-color: #e9f6fc;
+                    color: #3677a5;
+                    padding: 4px;
+                }
+            }
+
+
+            &.logo-data {
+                .logo-upper {
+                    display: flex;
+                    justify-content: center;
+                    background-color: #ba4c08;
+                    color: white;
+                    padding: 4px;
+                }
+    
+                .logo-lower {
+                    font-size: small;
+                    font-weight: bold;
+                    display: flex;
+                    justify-content: center;
+                    background-color: #fcf0eb;
+                    color: #ba4c08;
+                    padding: 4px;
+                }
+            }
+
+
+            &.logo-qa {
+                .logo-upper {
+                    display: flex;
+                    justify-content: center;
+                    background-color: #8446a9;
+                    color: white;
+                    padding: 4px;
+                }
+    
+                .logo-lower {
+                    font-size: small;
+                    font-weight: bold;
+                    display: flex;
+                    justify-content: center;
+                    background-color: #e9f6fc;
+                    color: #3677a5;
+                    padding: 4px;
+                }
+            }
+        }
+
+        .challenge-body {
+            display: grid;
+
+            .title-deadline-wrapper {
+                margin-top: 15px;
+
+                .challenge-title {
+                    text-decoration: none;
+                    overflow: hidden;
+                    font-weight: 500;
+                    font-size: larger;
+                    color: black;
+                }
+
+                .challenge-deadline {
+                    margin-top: 3px;
+                    color: #8d8d8d;
+                }
+            }
+
+            .challenge-count {
+                display: flex;
+                justify-content: flex-start;
+                margin-top: 20px;
+                margin-bottom: 20px;
+
+                .register-count-wrapper {
+                    display: flex;
+
+                    .user-icon {
+                        height: 20px;
+                        width: 20px;
+                        margin-right: 5px;
+                    }
+                }
+
+                .submissions-count-wrapper {
+                    display: flex;
+                    margin-left: 50px;
+
+                    .files-icon {
+                        height: 20px;
+                        width: 20px;
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+
+    .challenge-role {
+        display: flex;
+        flex: 1;
+
+        .role-value {
+            margin: auto 0px;
+        }
+
+        .role-label {
+            display: none;
+        }
+    }
+
+    .challenge-phase {
+        display: flex;
+        flex: 1;
+
+        .phase-value {
+            margin: auto 0px;
+        }
+
+        .phase-label {
+            display: none;
+        }
+    }
+
+    .mobile-challenge-logo {
+        display: none;
+    }
+
+    .mobile-challenge-body {
+        display: none;
+    }
+}
+
+.bottom-challenge-message {
+    margin: 22px 10px 10px 10px;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 900px) {
+    .challenge-list-container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 0 0px 0px;
+        margin-bottom: 30px;
+
+        .challenge-list-row {
+            .challenge-title {
+                display: none;
+            }
+            .challenge-role {
+                display: none;
+            }
+            .challenge-phase {
+                display: none;
+            }
+
+            .mobile-challenge-logo {
+                display: block;
+                flex: 1;
+                height: 83px;
+                margin: 0px 25px;
+
+                .challenge-logo {
+                    margin: 19px;
+        
+                    &.logo-dev {
+                        .logo-upper {
+                            display: flex;
+                            justify-content: center;
+                            background-color: #4d8833;
+                            color: white;
+                            padding: 4px;
+                        }
+            
+                        .logo-lower {
+                            font-size: small;
+                            font-weight: bold;
+                            display: flex;
+                            justify-content: center;
+                            background-color: #effae4;
+                            color: #4d8833;
+                            padding: 4px;
+                        }
+                    }
+        
+                    &.logo-design {
+                        .logo-upper {
+                            display: flex;
+                            justify-content: center;
+                            background-color: #3677a5;
+                            color: white;
+                            padding: 4px;
+                        }
+            
+                        .logo-lower {
+                            font-size: small;
+                            font-weight: bold;
+                            display: flex;
+                            justify-content: center;
+                            background-color: #e9f6fc;
+                            color: #3677a5;
+                            padding: 4px;
+                        }
+                    }
+        
+        
+                    &.logo-data {
+                        .logo-upper {
+                            display: flex;
+                            justify-content: center;
+                            background-color: #ba4c08;
+                            color: white;
+                            padding: 4px;
+                        }
+            
+                        .logo-lower {
+                            font-size: small;
+                            font-weight: bold;
+                            display: flex;
+                            justify-content: center;
+                            background-color: #fcf0eb;
+                            color: #ba4c08;
+                            padding: 4px;
+                        }
+                    }
+        
+        
+                    &.logo-qa {
+                        .logo-upper {
+                            display: flex;
+                            justify-content: center;
+                            background-color: #8446a9;
+                            color: white;
+                            padding: 4px;
+                        }
+            
+                        .logo-lower {
+                            font-size: small;
+                            font-weight: bold;
+                            display: flex;
+                            justify-content: center;
+                            background-color: #e9f6fc;
+                            color: #3677a5;
+                            padding: 4px;
+                        }
+                    }
+                }
+            }
+
+            .mobile-challenge-body {
+                display: grid;
+                flex: 14;
+                margin: 15px 20px 15px 0px;
+
+                .mobile-challenge-title {
+                    display: grid;
+                    margin-bottom: 20px;
+
+                    .mobile-challenge-title-text {
+                        text-decoration: none;
+                        overflow: hidden;
+                        font-weight: 500;
+                        font-size: larger;
+                        color: black;
+                    }
+    
+                    .challenge-deadline {
+                        margin-top: 3px;
+                        color: #8d8d8d;
+                    }
+                }
+
+                .mobile-role-phase-wrapper {
+                    display: grid;
+                    margin-bottom: 20px;
+
+                    .challenge-role {
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 5px;
+                
+                        .role-value {
+                            margin: auto 0px;
+                            font-size: larger;
+                        }
+                
+                        .role-label {
+                            display: block;
+                            color: #878787;
+                            font-weight: 500;
+                        }
+                    }
+
+                    .challenge-phase {
+                        display: flex;
+                        justify-content: space-between;
+                
+                        .phase-value {
+                            margin: auto 0px;
+                            font-size: larger;
+                        }
+                
+                        .phase-label {
+                            display: block;
+                            color: #878787;
+                            font-weight: 500;
+                        }
+                    }
+                }
+
+                .mobile-stats-wrapper {
+                    display: flex;
+                    justify-content: flex-end;
+
+                    .register-count-wrapper {
+                        display: flex;
+    
+                        .user-icon {
+                            height: 20px;
+                            width: 20px;
+                            margin-right: 5px;
+                        }
+                    }
+    
+                    .submissions-count-wrapper {
+                        display: flex;
+                        margin-left: 25px;
+    
+                        .files-icon {
+                            height: 20px;
+                            width: 20px;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

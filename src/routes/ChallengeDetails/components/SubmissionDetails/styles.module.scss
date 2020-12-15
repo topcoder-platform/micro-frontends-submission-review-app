@@ -1,0 +1,751 @@
+@import "styles/include";
+
+.submission-details-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    display: grid;
+
+    .submission-details-table {
+        @include table;
+
+        .table-head {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-left: 40px;
+
+            div {
+                color: #808080;
+            }
+        }
+
+        .row-expansion-wrapper {
+            margin-bottom: 20px;
+            border-spacing: 2px;
+            border-left: 3px solid #67ba8a;
+            box-shadow: 2px 3px #f0eded;
+
+            .table-row {
+                display: flex;
+                justify-content: space-between;
+                background-color: #f6f6f6;
+                padding: 20px 0px 20px 40px;
+
+                .submission-screening {
+                    display: grid;
+
+                    .status-warning-text {
+                        color: #e87921;
+                        margin: 5px 0px 0px 12px;
+                    }
+
+                    .status-pass {
+                        background-color: #74c806;
+                        color: white;
+                        padding: 9px 25px;
+                        border-radius: 25px;
+                        font-weight: 500;
+                        width: 60px;
+                        text-align: center;
+                        margin: auto 0px;
+                    }
+
+                    .status-fail {
+                        background-color: #e35023;
+                        color: white;
+                        padding: 9px 25px;
+                        border-radius: 25px;
+                        font-weight: 500;
+                        width: 60px;
+                        text-align: center;
+                        margin: auto 0px;
+                    }
+
+                    .status-warning {
+                        background-color: #e87921;
+                        color: white;
+                        padding: 9px 25px;
+                        border-radius: 25px;
+                        font-weight: 500;
+                        width: 60px;
+                        text-align: center;
+                        margin: auto 0px;
+                    }
+
+                    .status-notdefined {
+                        color: #999999;
+                        font-weight: 600;
+                        margin: auto 0px;
+                        font-style: italic;
+                    }
+                }
+
+                .submission-date-wrapper {
+                    display: grid;
+                }
+
+                .actions-icons-wrapper {
+                    .actions-icons {
+                        display: flex;
+                        justify-content: space-between;
+                        width: 70px;
+
+                        .expansion-button {
+                            border: none;
+                            background-color: #f6f6f6;
+                            outline: none;
+                        }
+                    }
+
+                    .actions-icons-dev {
+                        display: flex;
+                        justify-content: space-between;
+                        width: 100px;
+
+                        .expansion-button {
+                            border: none;
+                            background-color: #f6f6f6;
+                            outline: none;
+                        }
+
+                        .view-button {
+                            width: 25px;
+                            height: 25px;
+                            margin-right: 10px;
+                            margin-top: 2px;
+                        }
+                    }
+                }
+
+                .design-id-wrapper {
+                    display: grid;
+
+                    .design-short-id {
+                        margin-top: 7px;
+                        color: #808080;
+                    }
+                }
+            }
+
+            .description-wrapper {
+                padding: 20px;
+
+                .submission-description {
+                    // margin: 5px 0px;
+
+                    .description-pass {
+                        color: #74c806;
+                        margin-bottom: 10px;
+                    }
+                    .description-warning {
+                        color: #e87921;
+                        margin-bottom: 10px;
+                    }
+                    .description-fail {
+                        color: #e35023;
+                        margin-bottom: 10px;
+                    }
+                    .description-bold {
+                        font-weight: bold;
+                        margin-bottom: 10px;
+                    }
+                    .description-normal {
+                        margin-bottom: 10px;
+                    }
+                    .description-empty {
+                        margin-bottom: 30px;
+                    }
+                }
+            }
+
+            .submission-details-wrapper {
+                display: grid;
+                padding: 25px;
+
+                .submission-details-header {
+                    font-size: x-large;
+                    font-weight: 500;
+                    font-family: 'Barlow Condensed';
+                    margin-bottom: 12px;
+                }
+
+                .submission-details-tabs {
+                    display: flex;
+                    justify-content: flex-start;
+                    margin-bottom: 10px;
+                    border-bottom: 2px solid #dfdfdf;
+
+                    .inactive-tab {
+                        border: none;
+                        border-bottom: 2px solid #dfdfdf;
+                        background-color: white;
+                        outline: none;
+                        font-size: large;
+                        font-weight: 500;             
+                        margin-right: 30px;
+                        margin-bottom: -2px;
+                        padding-bottom: 4px;
+                        font-family: 'Barlow Condensed';
+                    }
+
+                    .active-tab {
+                        border: none;
+                        background-color: white;
+                        outline: none;
+                        border-bottom: 4px solid #67ba8a;
+                        color: #68ba8b;
+                        font-size: large;
+                        font-weight: 500;                
+                        margin-right: 30px;
+                        margin-bottom: -2px;
+                        padding-bottom: 4px;
+                        font-family: 'Barlow Condensed';
+                    }
+                }
+
+                .review-summary-table {
+                    border: 1px solid #e2e2e2;
+                    display: grid;
+                    border-radius: 5px;
+
+                    .review-summary-header {
+                        display: flex;
+                        justify-content: space-between;
+                        background-color: #f4f4f4;
+                        padding: 10px;
+
+                        .status-header {
+                            display: flex;
+                            justify-content: center;
+                        }
+
+                        div {
+                            color: #818181;
+                            font-weight: 500;
+                        }
+                    }
+
+                    .review-logs {
+                        border-bottom: 1px solid #e2e2e2;
+                        display: grid;
+
+                        .logs-row {
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 10px;
+
+                            button {
+                                color: #0f4fd7;
+                                outline: none;
+                                border: none;
+                                background-color: white;
+                                padding: 0px;
+                            }
+                        }
+
+                        .log-feedback-wrapper {
+                            display: grid;
+                            margin: 20px;
+
+                            .feedback-title {
+                                font-size: larger;
+                                font-weight: 500;
+                                margin-bottom: 15px;
+                            }
+
+                            .log-feedback {
+                                .feedback-message {
+                                    margin-bottom: 15px;
+                                }
+
+                                .feedback-link {
+                                    display: flex;
+                                    justify-content: flex-start;
+                                    margin-bottom: 5px;
+
+                                    .feedback-msg-link {
+                                        margin-right: 5px;
+                                    }
+
+                                    .link {
+                                        text-decoration: underline;
+                                        color: #0f4fd7;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                    .review-summary {
+                        border-bottom: 1px solid #e2e2e2;
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 10px;
+
+                        .open-status {
+                            background-color: #74c806;
+                            color: white;
+                            padding: 8px 0px;
+                            border-radius: 25px;
+                            display: flex;
+                            justify-content: center;
+                        }
+
+                        .closed-status {
+                            background-color: #e35023;
+                            color: white;
+                            padding: 8px 0px;
+                            border-radius: 25px;
+                            display: flex;
+                            justify-content: center;
+                        }
+
+                        .na-status {
+                            display: flex;
+                            justify-content: center;
+                        }
+                    }
+
+                    .review-summary-final {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 15px 10px;
+
+                        .open-status {
+                            background-color: #74c806;
+                            color: white;
+                            padding: 8px 0px;
+                            border-radius: 25px;
+                            display: flex;
+                            justify-content: center;
+                        }
+
+                        .closed-status {
+                            background-color: #e35023;
+                            color: white;
+                            padding: 8px 0px;
+                            border-radius: 25px;
+                            display: flex;
+                            justify-content: center;
+                        }
+
+                        .na-status {
+                            display: flex;
+                            justify-content: center;
+                        }
+
+                        div {
+                            font-weight: 500;
+                            margin: auto;
+                        }
+                    }
+                }
+            }
+        }
+
+        .mobile-row-expansion {
+            display: none;
+        }
+    }
+
+    .add-submission-wrapper {
+        display: flex;
+        justify-content: center;
+        margin: 15px 0px;
+
+        .submission-btn {
+            outline: none;
+            border: none;
+            background-color: #458061;
+            border-radius: 25px;
+            padding: 12px 28px;
+            color: white;
+            font-weight: 600;
+            font-size: medium;
+        }
+    }
+}
+
+
+.flex-3 {
+    flex: 3;
+}
+.flex-2 {
+    flex: 2;
+}
+.flex-1 {
+    flex: 1;
+}
+.modal-btn {
+    background-color: #f6f6f6;
+    border: none;
+    outline: none;
+    text-decoration: underline;
+    margin-left: 0px;
+    padding-left: 0px;
+    font-size: medium;
+    display: flex;
+    color: #3260dc;
+    cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+    .gray-divs {
+        color: #808080;    
+    }
+
+    .submission-details-container {
+        .submission-details-table {
+            .table-head {
+                display: none;
+            }
+
+            .row-expansion-wrapper {
+                display: none;
+            }
+
+            .mobile-row-expansion {
+                display: grid;
+
+                .mobile-row-expansion-wrapper {        
+                    margin-bottom: 20px;
+                    border-spacing: 2px;
+                    border-left: 3px solid #67ba8a;
+                    box-shadow: 2px 3px #f0eded;
+
+                    .mobile-table-row {
+                        display: grid;
+                        background-color: #f6f6f6;
+                        padding: 20px 20px 20px 40px;
+
+                        .mobile-rank {
+                            font-size: large;
+                            font-weight: 500;
+                            margin-bottom: 10px;
+                        }
+
+                        .submission-id-wrapper {
+                            margin-bottom: 15px;
+
+                            .submission-ids {
+                                margin-top: 10px;
+                                display: flex;
+                                justify-content: space-between;
+
+                                .design-short-id {
+                                    color: #808080;
+                                }
+                            }
+                        }
+
+                        .submission-other-details {
+                            display: grid;
+                            margin-bottom: 15px;
+
+                            .submission-type-wrapper {
+                                display: flex;
+                                justify-content: space-between;
+                                margin-bottom: 10px;
+                            }
+
+                            .submission-date-wrapper {
+                                display: flex;
+                                justify-content: space-between;
+                                margin-bottom: 10px;
+                            }
+
+                            .submission-status-wrapper {
+                                display: flex;
+                                justify-content: space-between;
+                                margin-bottom: 10px;
+
+                                .status-notdefined {
+                                    color: #999999;
+                                    font-weight: 600;
+                                    margin: auto 0px;
+                                    font-style: italic;
+                                }
+
+                                .warning-fail-cases {
+                                    display: flex;
+                                    justify-content: flex-start;
+
+                                    .status-warning-text {
+                                        color: #e87921;
+                                        margin: 0px 0px 0px 12px;
+                                    }
+
+                                    .status-fail-text {
+                                        color: #e35023;
+                                        margin: 0px 0px 0px 12px;
+                                    }
+                                }
+                            }
+
+                            .submission-score-wrapper {
+                                display: flex;
+                                justify-content: space-between;
+                                margin-bottom: 10px;
+                            }
+                        }
+
+                        .submission-button-wrapper {
+                            display: flex;
+                            justify-content: space-between;
+
+                            .expansion-button {
+                                display: flex;
+                                justify-content: flex-start; 
+                                color: #0f4fd7;
+                                outline: none;
+                                border: none;
+                                padding-left: 0px;
+                                background-color: #f6f6f6;
+
+                                .expand-btn-text {
+                                    margin-top: 4px;
+                                    margin-right: 11px;
+                                    font-size: medium;
+                                }
+                            }
+
+                            .actions-icons-dev {
+                                display: flex;
+                                justify-content: space-between;
+        
+                                .view-button {
+                                    width: 25px;
+                                    height: 25px;
+                                    margin-right: 10px;
+                                }
+                            }
+                        }
+                    }
+
+                    .description-wrapper {
+                        padding: 20px;
+        
+                        .submission-description {
+                            // margin: 5px 0px;
+        
+                            .description-pass {
+                                color: #74c806;
+                                margin-bottom: 10px;
+                            }
+                            .description-warning {
+                                color: #e87921;
+                                margin-bottom: 10px;
+                            }
+                            .description-fail {
+                                color: #e35023;
+                                margin-bottom: 10px;
+                            }
+                            .description-bold {
+                                font-weight: bold;
+                                margin-bottom: 10px;
+                            }
+                            .description-normal {
+                                margin-bottom: 10px;
+                            }
+                            .description-empty {
+                                margin-bottom: 30px;
+                            }
+                        }
+                    }
+
+                    .submission-details-wrapper {
+                        display: grid;
+                        padding: 25px;
+        
+                        .submission-details-header {
+                            font-size: x-large;
+                            font-weight: 500;
+                            font-family: 'Barlow Condensed';
+                            margin-bottom: 12px;
+                        }
+        
+                        .submission-details-tabs {
+                            display: flex;
+                            justify-content: flex-start;
+                            margin-bottom: 10px;
+                            border-bottom: 2px solid #dfdfdf;
+        
+                            .inactive-tab {
+                                border: none;
+                                border-bottom: 2px solid #dfdfdf;
+                                background-color: white;
+                                outline: none;
+                                font-size: large;
+                                font-weight: 500;             
+                                margin-right: 30px;
+                                margin-bottom: -2px;
+                                padding-bottom: 4px;
+                                font-family: 'Barlow Condensed';
+                            }
+        
+                            .active-tab {
+                                border: none;
+                                background-color: white;
+                                outline: none;
+                                border-bottom: 4px solid #67ba8a;
+                                color: #68ba8b;
+                                font-size: large;
+                                font-weight: 500;                
+                                margin-right: 30px;
+                                margin-bottom: -2px;
+                                padding-bottom: 4px;
+                                font-family: 'Barlow Condensed';
+                            }
+                        }
+        
+                        .review-summary-table {
+                            border: 1px solid #e2e2e2;
+                            display: grid;
+                            border-radius: 5px;
+                            overflow: auto;
+        
+                            .review-summary-header {
+                                display: flex;
+                                justify-content: space-between;
+                                background-color: #f4f4f4;
+                                padding: 10px;
+                                min-width: 600px;
+        
+                                .status-header {
+                                    display: flex;
+                                    justify-content: center;
+                                }
+        
+                                div {
+                                    color: #818181;
+                                    font-weight: 500;
+                                }
+                            }
+        
+                            .review-logs {
+                                border-bottom: 1px solid #e2e2e2;
+                                display: grid;
+                                min-width: 600px;
+        
+                                .logs-row {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    padding: 10px;
+        
+                                    button {
+                                        color: #0f4fd7;
+                                        outline: none;
+                                        border: none;
+                                        background-color: white;
+                                        padding: 0px;
+                                    }
+                                }
+        
+                                .log-feedback-wrapper {
+                                    display: grid;
+                                    margin: 20px;
+        
+                                    .feedback-title {
+                                        font-size: larger;
+                                        font-weight: 500;
+                                        margin-bottom: 15px;
+                                    }
+        
+                                    .log-feedback {
+                                        .feedback-message {
+                                            margin-bottom: 15px;
+                                        }
+        
+                                        .feedback-link {
+                                            display: flex;
+                                            justify-content: flex-start;
+                                            margin-bottom: 5px;
+        
+                                            .feedback-msg-link {
+                                                margin-right: 5px;
+                                            }
+        
+                                            .link {
+                                                text-decoration: underline;
+                                                color: #0f4fd7;
+                                            }
+                                        }
+                                    }
+                                }
+        
+                            }
+        
+                            .review-summary {
+                                border-bottom: 1px solid #e2e2e2;
+                                display: flex;
+                                justify-content: space-between;
+                                padding: 10px;
+                                min-width: 600px;
+        
+                                .open-status {
+                                    background-color: #74c806;
+                                    color: white;
+                                    padding: 8px 0px;
+                                    border-radius: 25px;
+                                    display: flex;
+                                    justify-content: center;
+                                }
+        
+                                .closed-status {
+                                    background-color: #e35023;
+                                    color: white;
+                                    padding: 8px 0px;
+                                    border-radius: 25px;
+                                    display: flex;
+                                    justify-content: center;
+                                }
+        
+                                .na-status {
+                                    display: flex;
+                                    justify-content: center;
+                                }
+                            }
+        
+                            .review-summary-final {
+                                display: flex;
+                                justify-content: space-between;
+                                padding: 15px 10px;
+                                min-width: 600px;
+        
+                                .open-status {
+                                    background-color: #74c806;
+                                    color: white;
+                                    padding: 8px 0px;
+                                    border-radius: 25px;
+                                    display: flex;
+                                    justify-content: center;
+                                }
+        
+                                .closed-status {
+                                    background-color: #e35023;
+                                    color: white;
+                                    padding: 8px 0px;
+                                    border-radius: 25px;
+                                    display: flex;
+                                    justify-content: center;
+                                }
+
+                                .na-status {
+                                    display: flex;
+                                    justify-content: center;
+                                }
+        
+                                div {
+                                    font-weight: 500;
+                                    margin: auto;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

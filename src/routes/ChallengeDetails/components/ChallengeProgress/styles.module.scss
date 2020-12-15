@@ -1,0 +1,113 @@
+@import "styles/include";
+
+.challenge-progress-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    margin: 38px 0px;
+    border-radius: 5px;
+    padding: 0px 0px 0px 26px;
+}
+
+.purse-stats-wrapper {
+    display: grid;
+
+    .purse-wrapper {
+        display: flex;
+
+        .purse-value {
+            display: grid;
+            margin: 17px 17px 18px 0px;
+            border-bottom: 2px solid gray;
+            padding-bottom: 4px;
+
+            .purse-rank {
+                text-align: right;
+                color: #9f9fa9;
+                font-size: medium;
+            }
+
+            .purse-money {
+                font-size: x-large;
+                font-weight: 500;
+                font-family: 'Barlow Condensed';
+            }
+        }
+    }
+
+    .stats-wrapper {
+        display: grid;
+        margin: 15px 0px;
+    }
+}
+
+.progress-view-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .view-challenge-wrapper {
+        display: grid;
+        background-color: #f4f9fe;
+        padding: 16px;
+
+        .view-challenge {
+            height: 30px;
+            border-radius: 16px;
+            border: 0px;
+            background-color: #458061;
+            color: white;
+            padding: 0px 19px;
+            font-weight: 600;
+            margin: auto;
+            outline: none;
+        }
+    }
+
+}
+
+@media (max-width: 1550px) {
+    .progress-view-wrapper {
+        display: grid;
+        justify-content: unset;
+
+        .view-challenge-wrapper {
+            margin-top: 20px;
+            background-color: white;
+        }
+    }
+}
+
+@media (max-width: 1400px) {
+    .challenge-progress-container {
+        display: grid;
+        padding: 0px 0px 0px 20px;
+        justify-content: unset;
+    }
+
+    .purse-stats-wrapper {
+        display: flex;
+        justify-content: flex-start;
+
+        .purse-wrapper {
+            margin-right: 20px;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .purse-stats-wrapper {
+        display: grid;
+        justify-content: flex-start;
+
+        .stats-wrapper {
+            margin-top: 0px;
+        }
+    }
+
+    .progress-view-wrapper {
+        .view-challenge-wrapper {
+            background-color: #f4f9fe;
+            margin-left: -20px;
+        }
+    }
+}
