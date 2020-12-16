@@ -7,14 +7,14 @@ const appMenu = [
   {
     title: "My Challenges List",
     path: "/submissions",
-    icon: challengeListIcon,
-    activeIcon: challengeListActiveIcon,
+    icon: <challengeListIcon />,
+    activeIcon: <challengeListActiveIcon />,
   },
   {
     title: "Challenge Details",
     path: "/submissions/mychallenges",
-    icon: challengeDetailsIcon,
-    activeIcon: challengeDetailsActiveIcon,
+    icon: <challengeDetailsIcon />,
+    activeIcon: <challengeDetailsActiveIcon />,
   }
 ];
 
