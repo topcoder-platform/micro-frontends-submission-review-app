@@ -2,7 +2,7 @@ module.exports = {
   /**
    * Challenges Service base URL
    */
-  TC_CHALLENGES_SERVICE_URL: "http://local.topcoder-dev.com:3000/api",
+  TC_CHALLENGES_SERVICE_URL: "http://local.topcoder-dev.com:8504/api",
 
   /**
    * URL of Topcoder Community Website
