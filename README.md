@@ -36,6 +36,18 @@ Inside the project folder run:
 - `npm run dev` - run app in development mode
 - As this app can be loaded only inside a frame single-spa, you have to run a `micro-frontends-frame` frame app and configure it to use the URL `http://localhost:8503/topcoder-submission-review-app.js`.
 
+### Run Mock API server:
+
+```bash
+cd local/mock-server
+
+npm install
+
+npm run start
+```
+
+This would host Mock API on http://local.topcoder-dev.com:8504.
+
 ## Verification
 
 Please check [verification.md](verification.md)
