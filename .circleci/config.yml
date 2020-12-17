@@ -73,7 +73,7 @@ workflows:
           filters:
             branches:
               only:
-                - dev
+                - feature/deployment
 
       # Production builds are exectuted only on tagged commits to the
       # master branch.

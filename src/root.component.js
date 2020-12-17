@@ -14,13 +14,16 @@ export default function Root() {
   }, []);
 
   return (
-    <ChallengeDetailsProvider>
-      <div styleName="micro-frontends-submission-review-app">
-        <Router>
-          <MyChallengesList path="/submissions" />
-          <ChallengeDetails path="/submissions/mychallenges/:challengeId" />
-        </Router>
-      </div>
-    </ChallengeDetailsProvider>
+    <div style={{ textAlign: "center" }}>
+      <h1>Submission Review Placeholder</h1>
+      <ChallengeDetailsProvider>
+        <div styleName="micro-frontends-submission-review-app">
+          <Router>
+            <MyChallengesList path="/submissions" />
+            <ChallengeDetails path="/submissions/mychallenges/:challengeId" />
+          </Router>
+        </div>
+      </ChallengeDetailsProvider>
+    </div>
   );
 }
