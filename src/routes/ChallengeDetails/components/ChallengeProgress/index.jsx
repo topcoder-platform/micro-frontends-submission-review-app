@@ -18,6 +18,7 @@ const ChallengeProgress = ({ progress, purse, registers, submitters }) => {
           {purse &&
             purse.map((rank, index) => (
               <div
+                key={index}
                 styleName="purse-value"
                 style={{ borderColor: purseBackgroundColors[index] }}
               >
@@ -43,7 +44,7 @@ const ChallengeProgress = ({ progress, purse, registers, submitters }) => {
 
 ChallengeProgress.propTypes = {
   progress: PT.object,
-  purse: PT.object,
+  purse: PT.array,
   registers: PT.number,
   submitters: PT.number,
 };

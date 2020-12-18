@@ -64,7 +64,7 @@ const ProgressBar = ({ progress }) => {
       <div styleName="mobile-progress-details">
         {!!progressBar &&
           progressBar.map((phase, index) => (
-            <div styleName="phase-detail">
+            <div styleName="phase-detail" key={index}>
               <div styleName="circle-name-wrapper">
                 {phase.completed ? (
                   <div styleName="phase-circle">

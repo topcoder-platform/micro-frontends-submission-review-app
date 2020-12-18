@@ -7,7 +7,8 @@ import React from "react";
 import PT from "prop-types";
 import cn from "classnames";
 import Files from "../../../../assets/images/files.svg";
-import User from "../../../../assets/images/user.svg";
+import User from "../../../../assets/images/iconregistrant.svg";
+import UserMobile from "../../../../assets/images/user.svg";
 import { Link } from "@reach/router";
 import "./styles.module.scss";
 
@@ -109,7 +110,7 @@ const ChallengesList = ({ challenges }) => {
 
               <div styleName="mobile-stats-wrapper">
                 <div styleName="register-count-wrapper">
-                  <User styleName="user-icon" />
+                  <UserMobile styleName="user-icon" />
                   <div>{challenge.registers}</div>
                 </div>
                 <div styleName="submissions-count-wrapper">

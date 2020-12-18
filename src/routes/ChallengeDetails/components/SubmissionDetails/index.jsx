@@ -3,7 +3,7 @@
  *
  * Shows Details of the submission.
  */
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PT from "prop-types";
 import DownArrow from "../../../../assets/images/tick-down.svg";
 import ExpandArrow from "../../../../assets/images/expand-arrow.svg";
@@ -13,11 +13,14 @@ import SubmissionModal from "../../../../components/SubmissionModal";
 import "./styles.module.scss";
 
 const SubmissionDetails = ({ type, role, submissions }) => {
+  const [mySubmissions, setMySubmissions] = useState(submissions);
   const [submissionId, setSubmissionId] = useState(-1);
   const [viewSummary, setViewSummary] = useState(true);
   const [viewLogs, setViewLogs] = useState(false);
   const [previewLogId, setPreviewLogId] = useState(-1);
   const [showModal, setShowModal] = useState(false);
+  const [viewCheckpoint, setViewCheckpoint] = useState(true);
+  const [viewFinal, setViewFinal] = useState(false);
 
   const showModalHandler = () => {
     setShowModal(true);
@@ -55,6 +58,16 @@ const SubmissionDetails = ({ type, role, submissions }) => {
     }
   };
 
+  const handleCopilotDesignTabs = (activate_tab) => {
+    if (activate_tab === "Checkpoint") {
+      setViewFinal(false);
+      setViewCheckpoint(true);
+    } else if (activate_tab === "Final") {
+      setViewFinal(true);
+      setViewCheckpoint(false);
+    }
+  }
+
   const handlePreviewLogs = (log_id) => {
     if (!!log_id) {
       if (previewLogId === log_id) {
@@ -68,6 +81,42 @@ const SubmissionDetails = ({ type, role, submissions }) => {
   return (
     <div styleName="submission-details-container">
       <SubmissionModal show={showModal} handleClose={closeModalHandler} />
+
+      {role == "Copilot" && type == "Design" && !!mySubmissions && (
+        <div styleName="submission-details-tabs-design-copilot">
+          {viewCheckpoint && (
+            <button styleName="design-copilot-active-tab" >Checkpoint ({mySubmissions.filter(
+              (x) => x['type'] === 'Checkpoint'
+            ).length})</button>
+          )}
+          {!viewCheckpoint && (
+            <button 
+              styleName="design-copilot-inactive-tab" 
+              onClick={() =>
+                handleCopilotDesignTabs("Checkpoint")
+              }
+            >Checkpoint ({mySubmissions.filter(
+              (x) => x['type'] === 'Checkpoint'
+            ).length})</button>
+          )}
+          
+          {viewFinal && (
+            <button styleName="design-copilot-active-tab" >Final ({mySubmissions.filter(
+              (x) => x['type'] === 'Final'
+            ).length})</button>
+          )}
+          {!viewFinal && (
+            <button 
+              styleName="design-copilot-inactive-tab" 
+              onClick={() =>
+                handleCopilotDesignTabs("Final")
+              }
+            >Final ({mySubmissions.filter(
+              (x) => x['type'] === 'Final'
+            ).length})</button>
+          )}
+        </div>
+      )}
 
       <div styleName="submission-details-table">
         {(type == "Development" || type == "Data" || type == "QA") && (
@@ -95,10 +144,10 @@ const SubmissionDetails = ({ type, role, submissions }) => {
           </div>
         )}
 
-        {!!submissions &&
-          type === "Design" &&
-          submissions.map((submission) => (
-            <div styleName="row-expansion-wrapper">
+        {!!mySubmissions &&
+          type === "Design" && role !== "Copilot" &&
+          mySubmissions.map((submission, index) => (
+            <div styleName="row-expansion-wrapper" key={index}>
               <div styleName="table-row">
                 <div styleName="design-id-wrapper flex-3">
                   <button onClick={showModalHandler} styleName="modal-btn">
@@ -214,10 +263,252 @@ const SubmissionDetails = ({ type, role, submissions }) => {
             </div>
           ))}
 
-        {!!submissions &&
+        {!!mySubmissions &&
+          type === "Design" && role === "Copilot" && viewCheckpoint &&
+          mySubmissions.filter(
+            (x) => x['type'] === 'Checkpoint'
+          ).map((submission, index) => (
+            <div styleName="row-expansion-wrapper" key={index}>
+              <div styleName="table-row">
+                <div styleName="design-id-wrapper flex-3">
+                  <button onClick={showModalHandler} styleName="modal-btn">
+                    {submission.id}
+                  </button>
+                  <div styleName="design-short-id">{submission.short_id}</div>
+                </div>
+                <div styleName="flex-1">{submission.type}</div>
+                <div styleName="submission-date-wrapper flex-2">
+                  <span>{submission.submission_date}</span>
+                  <span>{submission.submission_time}</span>
+                </div>
+                {submission.screening_status === "pass" && (
+                  <div styleName="submission-screening flex-2">
+                    <span styleName="status-pass">
+                      {submission.screening_text}
+                    </span>
+                  </div>
+                )}
+                {submission.screening_status === "warning" && (
+                  <div styleName="submission-screening flex-2">
+                    <span styleName="status-warning">
+                      {submission.screening_text}
+                    </span>
+                    <span styleName="status-warning-text">
+                      {submission.screening_warning}
+                    </span>
+                  </div>
+                )}
+                {submission.screening_status === "fail" && (
+                  <div styleName="submission-screening flex-2">
+                    <span styleName="status-fail">
+                      {submission.screening_text}
+                    </span>
+                    <span styleName="status-warning-text">
+                      {submission.screening_warning}
+                    </span>
+                  </div>
+                )}
+                {submission.screening_status === "" && (
+                  <div styleName="submission-screening flex-2">
+                    <div styleName="status-notdefined">
+                      Not yet performanced
+                    </div>
+                  </div>
+                )}
+                <div styleName="flex-2">{submission.review_score}</div>
+                <div styleName="actions-icons-wrapper flex-1">
+                  <div styleName="actions-icons">
+                    <Download />
+                    {submissionId === submission.short_id ? (
+                      <button
+                        styleName="expansion-button"
+                        onClick={() =>
+                          submissionExpandHandler(submission.short_id)
+                        }
+                      >
+                        <ExpandArrow />
+                      </button>
+                    ) : (
+                      <button
+                        styleName="expansion-button"
+                        onClick={() =>
+                          submissionExpandHandler(submission.short_id)
+                        }
+                      >
+                        <DownArrow />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {submissionId === submission.short_id && (
+                <div styleName="description-wrapper">
+                  {submission.descriptions &&
+                    submission.descriptions.map((description) => (
+                      <div styleName="submission-description">
+                        {description.status === "pass" && (
+                          <div styleName="description-pass">
+                            {description.message}
+                          </div>
+                        )}
+                        {description.status === "bold" && (
+                          <div styleName="description-bold">
+                            {description.message}
+                          </div>
+                        )}
+                        {description.status === "fail" && (
+                          <div styleName="description-fail">
+                            {description.message}
+                          </div>
+                        )}
+                        {description.status === "warning" && (
+                          <div styleName="description-warning">
+                            {description.message}
+                          </div>
+                        )}
+                        {description.status === "empty" && (
+                          <div styleName="description-empty">
+                            {description.message}
+                          </div>
+                        )}
+                        {description.status === "normal" && (
+                          <div styleName="description-normal">
+                            {description.message}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
+          ))}
+
+        {!!mySubmissions &&
+          type === "Design" && role === "Copilot" && viewFinal &&
+          mySubmissions.filter(
+            (x) => x['type'] === 'Final'
+          ).map((submission, index) => (
+            <div styleName="row-expansion-wrapper" key={index}>
+              <div styleName="table-row">
+                <div styleName="design-id-wrapper flex-3">
+                  <button onClick={showModalHandler} styleName="modal-btn">
+                    {submission.id}
+                  </button>
+                  <div styleName="design-short-id">{submission.short_id}</div>
+                </div>
+                <div styleName="flex-1">{submission.type}</div>
+                <div styleName="submission-date-wrapper flex-2">
+                  <span>{submission.submission_date}</span>
+                  <span>{submission.submission_time}</span>
+                </div>
+                {submission.screening_status === "pass" && (
+                  <div styleName="submission-screening flex-2">
+                    <span styleName="status-pass">
+                      {submission.screening_text}
+                    </span>
+                  </div>
+                )}
+                {submission.screening_status === "warning" && (
+                  <div styleName="submission-screening flex-2">
+                    <span styleName="status-warning">
+                      {submission.screening_text}
+                    </span>
+                    <span styleName="status-warning-text">
+                      {submission.screening_warning}
+                    </span>
+                  </div>
+                )}
+                {submission.screening_status === "fail" && (
+                  <div styleName="submission-screening flex-2">
+                    <span styleName="status-fail">
+                      {submission.screening_text}
+                    </span>
+                    <span styleName="status-warning-text">
+                      {submission.screening_warning}
+                    </span>
+                  </div>
+                )}
+                {submission.screening_status === "" && (
+                  <div styleName="submission-screening flex-2">
+                    <div styleName="status-notdefined">
+                      Not yet performanced
+                    </div>
+                  </div>
+                )}
+                <div styleName="flex-2">{submission.review_score}</div>
+                <div styleName="actions-icons-wrapper flex-1">
+                  <div styleName="actions-icons">
+                    <Download />
+                    {submissionId === submission.short_id ? (
+                      <button
+                        styleName="expansion-button"
+                        onClick={() =>
+                          submissionExpandHandler(submission.short_id)
+                        }
+                      >
+                        <ExpandArrow />
+                      </button>
+                    ) : (
+                      <button
+                        styleName="expansion-button"
+                        onClick={() =>
+                          submissionExpandHandler(submission.short_id)
+                        }
+                      >
+                        <DownArrow />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {submissionId === submission.short_id && (
+                <div styleName="description-wrapper">
+                  {submission.descriptions &&
+                    submission.descriptions.map((description) => (
+                      <div styleName="submission-description">
+                        {description.status === "pass" && (
+                          <div styleName="description-pass">
+                            {description.message}
+                          </div>
+                        )}
+                        {description.status === "bold" && (
+                          <div styleName="description-bold">
+                            {description.message}
+                          </div>
+                        )}
+                        {description.status === "fail" && (
+                          <div styleName="description-fail">
+                            {description.message}
+                          </div>
+                        )}
+                        {description.status === "warning" && (
+                          <div styleName="description-warning">
+                            {description.message}
+                          </div>
+                        )}
+                        {description.status === "empty" && (
+                          <div styleName="description-empty">
+                            {description.message}
+                          </div>
+                        )}
+                        {description.status === "normal" && (
+                          <div styleName="description-normal">
+                            {description.message}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
+          ))}
+
+        {!!mySubmissions &&
           (type === "Development" || type === "Data" || type === "QA") &&
-          submissions.map((submission) => (
-            <div styleName="row-expansion-wrapper">
+          mySubmissions.map((submission, index) => (
+            <div styleName="row-expansion-wrapper" key={index}>
               <div styleName="table-row">
                 <div styleName="flex-1">{submission.rank}</div>
                 <div styleName="design-id-wrapper flex-3">
@@ -468,10 +759,10 @@ const SubmissionDetails = ({ type, role, submissions }) => {
           ))}
 
         <div styleName="mobile-row-expansion">
-          {!!submissions &&
+          {!!mySubmissions && role !== "Copilot" &&
             type === "Design" &&
-            submissions.map((submission) => (
-              <div styleName="mobile-row-expansion-wrapper">
+            mySubmissions.map((submission, index) => (
+              <div styleName="mobile-row-expansion-wrapper" key={index}>
                 <div styleName="mobile-table-row">
                   <div styleName="submission-id-wrapper">
                     <div styleName="gray-divs">ID</div>
@@ -596,10 +887,273 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                 )}
               </div>
             ))}
-          {!!submissions &&
+
+          {!!mySubmissions &&
+            type === "Design" && role === "Copilot" && viewCheckpoint &&
+            mySubmissions.filter(
+              (x) => x['type'] === 'Checkpoint'
+            ).map((submission, index) => (
+              <div styleName="mobile-row-expansion-wrapper" key={index}>
+                <div styleName="mobile-table-row">
+                  <div styleName="submission-id-wrapper">
+                    <div styleName="gray-divs">ID</div>
+                    <div styleName="submission-ids">
+                      <button onClick={showModalHandler} styleName="modal-btn">
+                        {submission.id}
+                      </button>
+                      <div styleName="design-short-id">
+                        {submission.short_id}
+                      </div>
+                    </div>
+                  </div>
+                  <div styleName="submission-other-details">
+                    <div styleName="submission-type-wrapper">
+                      <div styleName="gray-divs">Type</div>
+                      <div>{submission.type}</div>
+                    </div>
+                    <div styleName="submission-date-wrapper">
+                      <div styleName="gray-divs">Submission Date</div>
+                      <div>
+                        {submission.submission_date}{" "}
+                        {submission.submission_time}
+                      </div>
+                    </div>
+                    <div styleName="submission-status-wrapper">
+                      <div>Screening Status</div>
+                      {submission.screening_status === "" && (
+                        <div styleName="status-notdefined">
+                          Not yet performanced
+                        </div>
+                      )}
+                      {submission.screening_status === "pass" && (
+                        <div>{submission.screening_text}</div>
+                      )}
+                      {submission.screening_status === "warning" && (
+                        <div styleName="warning-fail-cases">
+                          <div>{submission.screening_text}</div>
+                          <span styleName="status-warning-text">
+                            ({submission.screening_warning})
+                          </span>
+                        </div>
+                      )}
+                      {submission.screening_status === "fail" && (
+                        <div styleName="warning-fail-cases">
+                          <div>{submission.screening_text}</div>
+                          <span styleName="status-fail-text">
+                            ({submission.screening_warning})
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div styleName="submission-score-wrapper">
+                      <div styleName="gray-divs">Review Score</div>
+                      <div>{submission.review_score}</div>
+                    </div>
+                  </div>
+                  <div styleName="submission-button-wrapper">
+                    {submissionId === submission.short_id ? (
+                      <button
+                        styleName="expansion-button"
+                        onClick={() =>
+                          submissionExpandHandler(submission.short_id)
+                        }
+                      >
+                        <div styleName="expand-btn-text">Hide Detail</div>
+                        <ExpandArrow />
+                      </button>
+                    ) : (
+                      <button
+                        styleName="expansion-button"
+                        onClick={() =>
+                          submissionExpandHandler(submission.short_id)
+                        }
+                      >
+                        <div styleName="expand-btn-text">Show Detail</div>
+                        <DownArrow />
+                      </button>
+                    )}
+                    <Download />
+                  </div>
+                </div>
+
+                {submissionId === submission.short_id && (
+                  <div styleName="description-wrapper">
+                    {submission.descriptions &&
+                      submission.descriptions.map((description) => (
+                        <div styleName="submission-description">
+                          {description.status === "pass" && (
+                            <div styleName="description-pass">
+                              {description.message}
+                            </div>
+                          )}
+                          {description.status === "bold" && (
+                            <div styleName="description-bold">
+                              {description.message}
+                            </div>
+                          )}
+                          {description.status === "fail" && (
+                            <div styleName="description-fail">
+                              {description.message}
+                            </div>
+                          )}
+                          {description.status === "warning" && (
+                            <div styleName="description-warning">
+                              {description.message}
+                            </div>
+                          )}
+                          {description.status === "empty" && (
+                            <div styleName="description-empty">
+                              {description.message}
+                            </div>
+                          )}
+                          {description.status === "normal" && (
+                            <div styleName="description-normal">
+                              {description.message}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                  </div>
+                )}
+              </div>
+            ))}
+
+          {!!mySubmissions &&
+            type === "Design" && role === "Copilot" && viewFinal &&
+            mySubmissions.filter(
+              (x) => x['type'] === 'Final'
+            ).map((submission, index) => (
+              <div styleName="mobile-row-expansion-wrapper" key={index}>
+                <div styleName="mobile-table-row">
+                  <div styleName="submission-id-wrapper">
+                    <div styleName="gray-divs">ID</div>
+                    <div styleName="submission-ids">
+                      <button onClick={showModalHandler} styleName="modal-btn">
+                        {submission.id}
+                      </button>
+                      <div styleName="design-short-id">
+                        {submission.short_id}
+                      </div>
+                    </div>
+                  </div>
+                  <div styleName="submission-other-details">
+                    <div styleName="submission-type-wrapper">
+                      <div styleName="gray-divs">Type</div>
+                      <div>{submission.type}</div>
+                    </div>
+                    <div styleName="submission-date-wrapper">
+                      <div styleName="gray-divs">Submission Date</div>
+                      <div>
+                        {submission.submission_date}{" "}
+                        {submission.submission_time}
+                      </div>
+                    </div>
+                    <div styleName="submission-status-wrapper">
+                      <div>Screening Status</div>
+                      {submission.screening_status === "" && (
+                        <div styleName="status-notdefined">
+                          Not yet performanced
+                        </div>
+                      )}
+                      {submission.screening_status === "pass" && (
+                        <div>{submission.screening_text}</div>
+                      )}
+                      {submission.screening_status === "warning" && (
+                        <div styleName="warning-fail-cases">
+                          <div>{submission.screening_text}</div>
+                          <span styleName="status-warning-text">
+                            ({submission.screening_warning})
+                          </span>
+                        </div>
+                      )}
+                      {submission.screening_status === "fail" && (
+                        <div styleName="warning-fail-cases">
+                          <div>{submission.screening_text}</div>
+                          <span styleName="status-fail-text">
+                            ({submission.screening_warning})
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div styleName="submission-score-wrapper">
+                      <div styleName="gray-divs">Review Score</div>
+                      <div>{submission.review_score}</div>
+                    </div>
+                  </div>
+                  <div styleName="submission-button-wrapper">
+                    {submissionId === submission.short_id ? (
+                      <button
+                        styleName="expansion-button"
+                        onClick={() =>
+                          submissionExpandHandler(submission.short_id)
+                        }
+                      >
+                        <div styleName="expand-btn-text">Hide Detail</div>
+                        <ExpandArrow />
+                      </button>
+                    ) : (
+                      <button
+                        styleName="expansion-button"
+                        onClick={() =>
+                          submissionExpandHandler(submission.short_id)
+                        }
+                      >
+                        <div styleName="expand-btn-text">Show Detail</div>
+                        <DownArrow />
+                      </button>
+                    )}
+                    <Download />
+                  </div>
+                </div>
+
+                {submissionId === submission.short_id && (
+                  <div styleName="description-wrapper">
+                    {submission.descriptions &&
+                      submission.descriptions.map((description) => (
+                        <div styleName="submission-description">
+                          {description.status === "pass" && (
+                            <div styleName="description-pass">
+                              {description.message}
+                            </div>
+                          )}
+                          {description.status === "bold" && (
+                            <div styleName="description-bold">
+                              {description.message}
+                            </div>
+                          )}
+                          {description.status === "fail" && (
+                            <div styleName="description-fail">
+                              {description.message}
+                            </div>
+                          )}
+                          {description.status === "warning" && (
+                            <div styleName="description-warning">
+                              {description.message}
+                            </div>
+                          )}
+                          {description.status === "empty" && (
+                            <div styleName="description-empty">
+                              {description.message}
+                            </div>
+                          )}
+                          {description.status === "normal" && (
+                            <div styleName="description-normal">
+                              {description.message}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                  </div>
+                )}
+              </div>
+            ))}
+
+          {!!mySubmissions &&
             (type === "Development" || type === "Data" || type === "QA") &&
-            submissions.map((submission) => (
-              <div styleName="mobile-row-expansion-wrapper">
+            mySubmissions.map((submission, index) => (
+              <div styleName="mobile-row-expansion-wrapper" key={index}>
                 <div styleName="mobile-table-row">
                   <div styleName="mobile-rank">#{submission.rank}</div>
                   <div styleName="submission-id-wrapper">
@@ -887,7 +1441,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
 SubmissionDetails.propTypes = {
   type: PT.string,
   role: PT.string,
-  submissions: PT.object,
+  submissions: PT.array,
 };
 
 export default SubmissionDetails;
