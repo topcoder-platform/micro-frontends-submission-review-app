@@ -6,6 +6,7 @@
         "role": "Copilot",
         "registers": 35,
         "submitters": 3,
+        "submissionCompleted": true,
         "purse": [
             {
                 "position": "1st",
@@ -182,6 +183,7 @@
         "role": "Submitter",
         "registers": 71,
         "submitters": 4,
+        "submissionCompleted": true,
         "purse": [
             {
                 "position": "1st",
@@ -605,6 +607,7 @@
         "role": "Copilot",
         "registers": 11,
         "submitters": 2,
+        "submissionCompleted": false,
         "purse": [
             {
                 "position": "1st",
@@ -810,6 +813,7 @@
         "role": "Submitter",
         "registers": 9,
         "submitters": 1,
+        "submissionCompleted": false,
         "purse": [
             {
                 "position": "1st",

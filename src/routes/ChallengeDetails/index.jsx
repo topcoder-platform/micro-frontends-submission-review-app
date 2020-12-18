@@ -36,6 +36,7 @@ const ChallengeDetails = ({ challengeId }) => {
         <SubmissionDetails
           type={challenge.type}
           role={challenge.role}
+          submissionCompleted={challenge.submissionCompleted}
           submissions={challenge.submissions}
         />
       )}
