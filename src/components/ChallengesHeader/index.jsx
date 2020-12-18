@@ -5,6 +5,7 @@
  * Also, can show something right to the title (aside).
  */
 import React from "react";
+import DownArrow from "../../assets/images/tick-down-green.svg";
 import PT from "prop-types";
 import "./styles.module.scss";
 
@@ -15,18 +16,24 @@ const ChallengesHeader = ({ title, onChangeFilter }) => {
       <div styleName="filter-dropdowns">
         <fieldset styleName="filter-dropdown">
           <legend styleName="dropdown-legend">My Roles</legend>
-          <select styleName="dropdown-select" onChange={onChangeFilter}>
-            <option value=""> All </option>
-            <option value="Submitter"> Submitter </option>
-            <option value="Copilot"> Co-Pilot </option>
-          </select>
+          <div styleName="dropdown-select-div">
+            <select styleName="dropdown-select" onChange={onChangeFilter}>
+              <option value=""> All </option>
+              <option value="Submitter"> Submitter </option>
+              <option value="Copilot"> Co-Pilot </option>
+            </select>
+            <DownArrow styleName="down-arrow" />
+          </div>
         </fieldset>
         <div styleName="dropdowns-separator" />
         <fieldset styleName="filter-dropdown">
           <legend styleName="dropdown-legend">Sort By</legend>
-          <select styleName="dropdown-select">
-            <option>Current Phase</option>
-          </select>
+          <div styleName="dropdown-select-div">
+            <select styleName="dropdown-select">
+              <option>Current Phase</option>
+            </select>
+            <DownArrow styleName="down-arrow" />
+          </div>
         </fieldset>
         <div styleName="mobile-filter-dropdown">
           <div styleName="mobile-dropdown-label">My Roles:</div>
@@ -39,6 +46,7 @@ const ChallengesHeader = ({ title, onChangeFilter }) => {
               <option value="Submitter"> Submitter </option>
               <option value="Copilot"> Co-Pilot </option>
             </select>
+            <DownArrow styleName="down-arrow" />
           </div>
         </div>
         <div styleName="mobile-filter-dropdown">
@@ -47,6 +55,7 @@ const ChallengesHeader = ({ title, onChangeFilter }) => {
             <select styleName="mobile-dropdown-select">
               <option>Current Phase</option>
             </select>
+            <DownArrow styleName="down-arrow" />
           </div>
         </div>
       </div>

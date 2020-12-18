@@ -2,12 +2,49 @@
 
 .submission-details-container {
     background-color: white;
-    padding: 20px;
     border-radius: 5px;
     display: grid;
 
+    .submission-details-tabs-design-copilot {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 30px;
+        border-bottom: 1px solid #dcdce0;
+        padding-left: 25px;
+
+        
+        .design-copilot-inactive-tab {
+            border: none;
+            border-bottom: 1px solid #dfdfdf;
+            background-color: white;
+            outline: none;
+            font-size: 18px;
+            font-weight: bold;             
+            margin-right: 30px;
+            margin-bottom: -1px;
+            padding-bottom: 20px;
+            font-family: 'Barlow Condensed';
+            text-transform: uppercase;
+        }
+
+        .design-copilot-active-tab {
+            border: none;
+            background-color: white;
+            outline: none;
+            border-bottom: 4px solid #67ba8a;
+            color: #68ba8b;
+            font-size: 18px;
+            font-weight: bold;                
+            margin-right: 30px;
+            margin-bottom: -2px;
+            padding-bottom: 20px;
+            font-family: 'Barlow Condensed';
+            text-transform: uppercase;
+        }
+    }
+
     .submission-details-table {
-        @include table;
+        padding: 20px;
 
         .table-head {
             display: flex;

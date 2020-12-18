@@ -49,6 +49,7 @@
     }
 
     .phase-details {
+        width: 830px;
         display: flex;
         justify-content: space-between;
 
@@ -82,7 +83,7 @@
     }
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1700px) {
     .progress-bar-wrapper {
         margin-right: 0px;
     }
