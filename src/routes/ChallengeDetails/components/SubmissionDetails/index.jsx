@@ -12,7 +12,7 @@ import View from "../../../../assets/images/view.svg";
 import SubmissionModal from "../../../../components/SubmissionModal";
 import "./styles.module.scss";
 
-const SubmissionDetails = ({ type, role, submissions }) => {
+const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => {
   const [mySubmissions, setMySubmissions] = useState(submissions);
   const [submissionId, setSubmissionId] = useState(-1);
   const [viewSummary, setViewSummary] = useState(true);
@@ -197,7 +197,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                 <div styleName="flex-2">{submission.review_score}</div>
                 <div styleName="actions-icons-wrapper flex-1">
                   <div styleName="actions-icons">
-                    <Download />
+                    <Download style={{ cursor: 'pointer' }}/>
                     {submissionId === submission.short_id ? (
                       <button
                         styleName="expansion-button"
@@ -205,7 +205,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                           submissionExpandHandler(submission.short_id)
                         }
                       >
-                        <ExpandArrow />
+                        <ExpandArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     ) : (
                       <button
@@ -214,7 +214,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                           submissionExpandHandler(submission.short_id)
                         }
                       >
-                        <DownArrow />
+                        <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
                   </div>
@@ -318,7 +318,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                 <div styleName="flex-2">{submission.review_score}</div>
                 <div styleName="actions-icons-wrapper flex-1">
                   <div styleName="actions-icons">
-                    <Download />
+                    <Download style={{ cursor: 'pointer' }}/>
                     {submissionId === submission.short_id ? (
                       <button
                         styleName="expansion-button"
@@ -326,7 +326,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                           submissionExpandHandler(submission.short_id)
                         }
                       >
-                        <ExpandArrow />
+                        <ExpandArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     ) : (
                       <button
@@ -335,7 +335,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                           submissionExpandHandler(submission.short_id)
                         }
                       >
-                        <DownArrow />
+                        <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
                   </div>
@@ -439,7 +439,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                 <div styleName="flex-2">{submission.review_score}</div>
                 <div styleName="actions-icons-wrapper flex-1">
                   <div styleName="actions-icons">
-                    <Download />
+                    <Download style={{ cursor: 'pointer' }}/>
                     {submissionId === submission.short_id ? (
                       <button
                         styleName="expansion-button"
@@ -447,7 +447,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                           submissionExpandHandler(submission.short_id)
                         }
                       >
-                        <ExpandArrow />
+                        <ExpandArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     ) : (
                       <button
@@ -456,7 +456,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                           submissionExpandHandler(submission.short_id)
                         }
                       >
-                        <DownArrow />
+                        <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
                   </div>
@@ -525,7 +525,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                 <div styleName="actions-icons-wrapper flex-1">
                   <div styleName="actions-icons-dev">
                     <View styleName="view-button" />
-                    <Download />
+                    <Download style={{ cursor: 'pointer' }}/>
                     {submissionId === submission.short_id ? (
                       <button
                         styleName="expansion-button"
@@ -533,7 +533,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                           submissionExpandHandler(submission.short_id)
                         }
                       >
-                        <ExpandArrow />
+                        <ExpandArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     ) : (
                       <button
@@ -542,7 +542,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                           submissionExpandHandler(submission.short_id)
                         }
                       >
-                        <DownArrow />
+                        <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
                   </div>
@@ -710,6 +710,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                                     handlePreviewLogs(log.artifacts_id)
                                   }
                                   styleName="flex-1"
+                                  style={{ cursor: 'pointer' }}
                                 >
                                   Hide Preview
                                 </button>
@@ -720,6 +721,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                                     handlePreviewLogs(log.artifacts_id)
                                   }
                                   styleName="flex-1"
+                                  style={{ cursor: 'pointer' }}
                                 >
                                   Preview
                                 </button>
@@ -829,7 +831,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                         }
                       >
                         <div styleName="expand-btn-text">Hide Detail</div>
-                        <ExpandArrow />
+                        <ExpandArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     ) : (
                       <button
@@ -839,10 +841,10 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                         }
                       >
                         <div styleName="expand-btn-text">Show Detail</div>
-                        <DownArrow />
+                        <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
-                    <Download />
+                    <Download style={{ cursor: 'pointer' }}/>
                   </div>
                 </div>
 
@@ -960,7 +962,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                         }
                       >
                         <div styleName="expand-btn-text">Hide Detail</div>
-                        <ExpandArrow />
+                        <ExpandArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     ) : (
                       <button
@@ -970,10 +972,10 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                         }
                       >
                         <div styleName="expand-btn-text">Show Detail</div>
-                        <DownArrow />
+                        <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
-                    <Download />
+                    <Download style={{ cursor: 'pointer' }}/>
                   </div>
                 </div>
 
@@ -1091,7 +1093,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                         }
                       >
                         <div styleName="expand-btn-text">Hide Detail</div>
-                        <ExpandArrow />
+                        <ExpandArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     ) : (
                       <button
@@ -1101,10 +1103,10 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                         }
                       >
                         <div styleName="expand-btn-text">Show Detail</div>
-                        <DownArrow />
+                        <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
-                    <Download />
+                    <Download style={{ cursor: 'pointer' }}/>
                   </div>
                 </div>
 
@@ -1196,7 +1198,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                         }
                       >
                         <div styleName="expand-btn-text">Hide Detail</div>
-                        <ExpandArrow />
+                        <ExpandArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     ) : (
                       <button
@@ -1206,12 +1208,12 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                         }
                       >
                         <div styleName="expand-btn-text">Show Detail</div>
-                        <DownArrow />
+                        <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
                     <div styleName="actions-icons-dev">
                       <View styleName="view-button" />
-                      <Download />
+                      <Download style={{ cursor: 'pointer' }}/>
                     </div>
                   </div>
                 </div>
@@ -1380,6 +1382,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                                       handlePreviewLogs(log.artifacts_id)
                                     }
                                     styleName="flex-1"
+                                    style={{ cursor: 'pointer' }}
                                   >
                                     Hide Preview
                                   </button>
@@ -1390,6 +1393,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
                                       handlePreviewLogs(log.artifacts_id)
                                     }
                                     styleName="flex-1"
+                                    style={{ cursor: 'pointer' }}
                                   >
                                     Preview
                                   </button>
@@ -1429,7 +1433,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
             ))}
         </div>
       </div>
-      {role !== "Copilot" && (
+      {(role !== "Copilot" && !submissionCompleted) && (
         <div styleName="add-submission-wrapper">
           <button styleName="submission-btn">ADD SUBMISSION</button>
         </div>
@@ -1441,6 +1445,7 @@ const SubmissionDetails = ({ type, role, submissions }) => {
 SubmissionDetails.propTypes = {
   type: PT.string,
   role: PT.string,
+  submissionCompleted: PT.bool,
   submissions: PT.array,
 };
 

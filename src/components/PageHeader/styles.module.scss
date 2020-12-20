@@ -13,12 +13,16 @@
   display: grid;
   margin-right: 32px;
   padding: 16px 0;
+  margin-bottom: 20px;
 }
 
 .title-content {
   overflow-wrap: anywhere;
   padding: 0;
   color: #9a9b9b;
+  font-size: 15px;
+  line-height: 0px;
+  text-align: left;
 }
 
 .title {

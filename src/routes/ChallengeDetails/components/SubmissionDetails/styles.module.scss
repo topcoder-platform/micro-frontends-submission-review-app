@@ -69,6 +69,10 @@
                 background-color: #f6f6f6;
                 padding: 20px 0px 20px 40px;
 
+                div {
+                    margin: auto;
+                }
+
                 .submission-screening {
                     display: grid;
 
@@ -151,6 +155,7 @@
                             height: 25px;
                             margin-right: 10px;
                             margin-top: 2px;
+                            cursor: pointer;
                         }
                     }
                 }
@@ -161,6 +166,7 @@
                     .design-short-id {
                         margin-top: 7px;
                         color: #808080;
+                        margin-left: 0px;
                     }
                 }
             }
@@ -210,7 +216,7 @@
                 .submission-details-tabs {
                     display: flex;
                     justify-content: flex-start;
-                    margin-bottom: 10px;
+                    margin-bottom: 20px;
                     border-bottom: 2px solid #dfdfdf;
 
                     .inactive-tab {
@@ -251,6 +257,7 @@
                         justify-content: space-between;
                         background-color: #f4f4f4;
                         padding: 10px;
+                        padding-left: 20px;
 
                         .status-header {
                             display: flex;
@@ -271,6 +278,7 @@
                             display: flex;
                             justify-content: space-between;
                             padding: 10px;
+                            padding-left: 20px;
 
                             button {
                                 color: #0f4fd7;
@@ -320,6 +328,7 @@
                         display: flex;
                         justify-content: space-between;
                         padding: 10px;
+                        padding-left: 20px;
 
                         .open-status {
                             background-color: #74c806;
@@ -349,6 +358,7 @@
                         display: flex;
                         justify-content: space-between;
                         padding: 15px 10px;
+                        padding-left: 20px;
 
                         .open-status {
                             background-color: #74c806;
@@ -401,6 +411,7 @@
             color: white;
             font-weight: 600;
             font-size: medium;
+            cursor: pointer;
         }
     }
 }
@@ -426,6 +437,7 @@
     display: flex;
     color: #3260dc;
     cursor: pointer;
+    font-weight: 600;
 }
 
 @media (max-width: 1200px) {
@@ -556,6 +568,7 @@
                                     width: 25px;
                                     height: 25px;
                                     margin-right: 10px;
+                                    cursor: pointer;
                                 }
                             }
                         }
@@ -606,7 +619,7 @@
                         .submission-details-tabs {
                             display: flex;
                             justify-content: flex-start;
-                            margin-bottom: 10px;
+                            margin-bottom: 20px;
                             border-bottom: 2px solid #dfdfdf;
         
                             .inactive-tab {
@@ -648,6 +661,7 @@
                                 justify-content: space-between;
                                 background-color: #f4f4f4;
                                 padding: 10px;
+                                padding-left: 20px;
                                 min-width: 600px;
         
                                 .status-header {
@@ -670,6 +684,7 @@
                                     display: flex;
                                     justify-content: space-between;
                                     padding: 10px;
+                                    padding-left: 20px;
         
                                     button {
                                         color: #0f4fd7;
@@ -719,6 +734,7 @@
                                 display: flex;
                                 justify-content: space-between;
                                 padding: 10px;
+                                padding-left: 20px;
                                 min-width: 600px;
         
                                 .open-status {
@@ -749,6 +765,7 @@
                                 display: flex;
                                 justify-content: space-between;
                                 padding: 15px 10px;
+                                padding-left: 20px;
                                 min-width: 600px;
         
                                 .open-status {

@@ -55,8 +55,11 @@ const ProgressBar = ({ progress }) => {
               ) : (
                 <div styleName="phase-circle"></div>
               )}
-              <span styleName="phase-name">{phase.name}</span>
-              <span styleName="phase-deadline">{phase.deadline}</span>
+              {phase.completed && <span styleName="phase-name">{phase.name}</span>}
+              {!phase.completed && <span styleName="phase-name-dull">{phase.name}</span>}
+
+              {phase.completed && <span styleName="phase-deadline">{phase.deadline}</span>}
+              {!phase.completed && <span styleName="phase-deadline-dull">{phase.deadline}</span>}
             </div>
           ))}
       </div>
@@ -72,11 +75,13 @@ const ProgressBar = ({ progress }) => {
                   </div>
                 ) : (
                   <div styleName="phase-circle"></div>
-                )}
-                <span styleName="phase-name">{phase.name}</span>
+                )}  
+                {phase.completed && <span styleName="phase-name">{phase.name}</span>}
+                {!phase.completed && <span styleName="phase-name-dull">{phase.name}</span>}
               </div>
               <div styleName="deadline-phase">
-                <span styleName="phase-deadline">{phase.deadline}</span>
+                {phase.completed && <span styleName="phase-deadline">{phase.deadline}</span>}
+                {!phase.completed && <span styleName="phase-deadline-dull">{phase.deadline}</span>}
               </div>
             </div>
           ))}
