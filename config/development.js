@@ -1,6 +1,6 @@
 module.exports = {
   /**
-   * Challenges Service base URL
+   * Insert the URL of APIs, whenever they are ready.
    */
   TC_CHALLENGES_SERVICE_URL: "http://local.topcoder-dev.com:8504/api",
 
