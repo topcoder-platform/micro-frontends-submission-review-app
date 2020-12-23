@@ -10,9 +10,13 @@ import ChallengeProgress from "./components/ChallengeProgress";
 import { useData } from "../../hooks/useData";
 import { getChallengeById } from "../../services/challenges";
 import SubmissionDetails from "./components/SubmissionDetails";
+import challengesById from "../../../local/mock-server/data/challengesById.json";
 
 const ChallengeDetails = ({ challengeId }) => {
-  const [challenge, loadingError] = useData(getChallengeById, challengeId);
+
+  // Uncomment this whenever APIs are ready or whenever you want to use Mock Server, for now static jsons are loaded
+  // const [challenge, loadingError] = useData(getChallengeById, challengeId);
+  const [challenge, loadingError] = [challengesById[challengeId], ''];
 
   return (
     <LayoutContainer>

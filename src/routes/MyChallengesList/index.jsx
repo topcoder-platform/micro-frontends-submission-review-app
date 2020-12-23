@@ -12,9 +12,13 @@ import { getMyChallenges } from "../../services/challenges";
 import ChallengesHeader from "../../components/ChallengesHeader";
 import ChallengesList from "./components/ChallengesList";
 import LoadingIndicator from "../../components/LoadingIndicator";
+import challengesJson from "../../../local/mock-server/data/challenges.json";
 
 const MyChallengesList = () => {
-  const [myChallenges, loadingError] = useData(getMyChallenges);
+
+  // Uncomment this whenever APIs are ready or whenever you want to use Mock Server, for now static jsons are loaded
+  // const [myChallenges, loadingError] = useData(getMyChallenges);
+  const [myChallenges, loadingError] = [challengesJson, ''];
   const [filterRole, setFilterRole] = useState("");
 
   const changeFilterRoleHandler = (event) => {
