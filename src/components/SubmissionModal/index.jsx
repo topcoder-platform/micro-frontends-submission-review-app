@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import Zip from "../../assets/images/zip.svg";
 import Close from "../../assets/images/cancel.svg";
 import "./styles.module.scss";
 
+
+
 const SubmissionModal = ({ handleClose, show }) => {
+
+  const useOutsideAlerter = (ref) => {
+    useEffect(() => {
+        /**
+         * Close if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                handleClose()
+            }
+        }
+  
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            // Unbind the event listener on clean up
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [ref]);
+  }
+  
   const showHideClassName = show ? "modal display-block" : "modal display-none";
+
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
 
   return (
     <div styleName={showHideClassName}>
-      <div styleName="modal-main">
+      <div styleName="modal-main" ref={wrapperRef}>
         <header styleName="submission-modal-header">
           <div styleName="modal-header-1">
             <div styleName="submission-zip-wrapper">

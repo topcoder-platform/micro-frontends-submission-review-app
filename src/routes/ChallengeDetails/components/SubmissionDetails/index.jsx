@@ -80,7 +80,8 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
 
   return (
     <div styleName="submission-details-container">
-      <SubmissionModal show={showModal} handleClose={closeModalHandler} />
+      {showModal && <SubmissionModal show={showModal} handleClose={closeModalHandler} />}
+      
 
       {role == "Copilot" && type == "Design" && !!mySubmissions && (
         <div styleName="submission-details-tabs-design-copilot">
