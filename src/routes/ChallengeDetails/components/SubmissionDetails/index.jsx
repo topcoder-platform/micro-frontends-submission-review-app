@@ -198,7 +198,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 <div styleName="flex-2">{submission.review_score}</div>
                 <div styleName="actions-icons-wrapper flex-1">
                   <div styleName="actions-icons">
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px'}}/>
                     {submissionId === submission.short_id ? (
                       <button
                         styleName="expansion-button"
@@ -319,7 +319,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 <div styleName="flex-2">{submission.review_score}</div>
                 <div styleName="actions-icons-wrapper flex-1">
                   <div styleName="actions-icons">
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                     {submissionId === submission.short_id ? (
                       <button
                         styleName="expansion-button"
@@ -440,7 +440,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 <div styleName="flex-2">{submission.review_score}</div>
                 <div styleName="actions-icons-wrapper flex-1">
                   <div styleName="actions-icons">
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                     {submissionId === submission.short_id ? (
                       <button
                         styleName="expansion-button"
@@ -526,7 +526,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 <div styleName="actions-icons-wrapper flex-1">
                   <div styleName="actions-icons-dev">
                     <View styleName="view-button" />
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                     {submissionId === submission.short_id ? (
                       <button
                         styleName="expansion-button"
@@ -845,7 +845,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                         <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                   </div>
                 </div>
 
@@ -976,7 +976,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                         <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                   </div>
                 </div>
 
@@ -1107,7 +1107,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                         <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                   </div>
                 </div>
 
@@ -1214,7 +1214,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                     )}
                     <div styleName="actions-icons-dev">
                       <View styleName="view-button" />
-                      <Download style={{ cursor: 'pointer' }}/>
+                      <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                     </div>
                   </div>
                 </div>

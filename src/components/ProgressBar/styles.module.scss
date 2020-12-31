@@ -13,7 +13,7 @@
         height: 10px;
 
         .dynamic-bar {
-            background-color: #67ba8a;
+            background-color: #0AB88A;
             height: 10px;
             border-radius: 5px;
         }
@@ -60,31 +60,37 @@
 
             .phase-circle {
                 border-radius: 25px;
-                height: 20px;
-                width: 20px;
+                height: 16px;
+                width: 16px;
                 background-color: #ebebeb;
                 margin: auto;
                 margin-bottom: 10px;
+                margin-top: -1px;
+                border: 2px solid white;
             }
 
             .phase-name {
                 margin: auto;
                 white-space: nowrap;
+                font-size: 14px;
             }
 
             .phase-name-dull {
                 margin: auto;
                 white-space: nowrap;
                 color: #808080;
+                font-size: 14px;
             }
 
             .phase-deadline {
                 margin: auto;
+                font-size: 14px;
             }
 
             .phase-deadline-dull {
                 margin: auto;
                 color: #808080;
+                font-size: 14px;
             }
         }
     }
@@ -129,8 +135,8 @@
 
                     .phase-circle {
                         border-radius: 25px;
-                        height: 20px;
-                        width: 20px;
+                        height: 16px;
+                        width: 16px;
                         background-color: #ebebeb;
                         margin: auto;
                     }
@@ -138,23 +144,27 @@
                     .phase-name {
                         margin: auto;
                         margin-left: 15px;
+                        font-size: 14px;
                     }
 
                     .phase-name-dull {
                         margin: auto;
                         margin-left: 15px;
                         color: #808080;
+                        font-size: 14px;
                     }
                 }
 
                 .deadline-phase {
                     .phase-deadline {
                         margin: auto;
+                        font-size: 14px;
                     }
 
                     .phase-deadline-dull {
                         margin: auto;
                         color: #808080;
+                        font-size: 14px;
                     }
                 }
             }
