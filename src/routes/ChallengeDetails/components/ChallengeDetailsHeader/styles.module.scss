@@ -15,7 +15,14 @@
   justify-content: flex-start;
 
   .back-btn {
-    display: none;
+    display: inline;
+    margin: auto;
+    margin-right: 20px;
+
+    .back-btn-svg {
+      width: 30px;
+      height: 30px;
+    }
   }
 
   .title-tag-wrapper {
