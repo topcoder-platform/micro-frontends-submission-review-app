@@ -23,8 +23,8 @@
 
             .purse-rank {
                 text-align: right;
-                color: #9f9fa9;
-                font-size: medium;
+                color: #555555;
+                font-size: 14px;
             }
 
             .purse-money {
@@ -38,6 +38,7 @@
     .stats-wrapper {
         display: grid;
         margin: 15px 0px;
+        font-size: 14px;
     }
 }
 
@@ -47,20 +48,21 @@
 
     .view-challenge-wrapper {
         display: grid;
-        background-color: #f4f9fe;
+        background-color: #E9E9E9;
         padding: 16px;
 
         .view-challenge {
             height: 30px;
             border-radius: 16px;
             border: 0px;
-            background-color: #458061;
+            background-color: #137860;
             color: white;
             padding: 0px 19px;
             font-weight: 600;
             margin: auto;
             outline: none;
             cursor: pointer;
+            font-family: 'Roboto';
         }
     }
 
@@ -107,7 +109,7 @@
 
     .progress-view-wrapper {
         .view-challenge-wrapper {
-            background-color: #f4f9fe;
+            background-color: #E9E9E9;
             margin-left: -20px;
         }
     }
