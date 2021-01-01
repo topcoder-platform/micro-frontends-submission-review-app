@@ -61,6 +61,7 @@
             {
                 "id": "9912424352342",
                 "short_id": 124423,
+                "rank": 1,
                 "type": "Final",
                 "submission_date": "01 Sep 2019",
                 "submission_time": "22:56:28",
@@ -88,6 +89,7 @@
             {
                 "id": "9924323524343",
                 "short_id": 124424,
+                "rank": 1,
                 "type": "Checkpoint",
                 "submission_date": "01 Sep 2019",
                 "submission_time": "22:56:28",
@@ -138,6 +140,7 @@
             {
                 "id": "99657342524424",
                 "short_id": 124425,
+                "rank": 2,
                 "type": "Checkpoint",
                 "submission_date": "01 Sep 2019",
                 "submission_time": "22:56:28",

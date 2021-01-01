@@ -2,7 +2,7 @@
 
 .submission-details-container {
     background-color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     display: grid;
 
     .submission-details-tabs-design-copilot {
@@ -62,7 +62,7 @@
             margin-bottom: 20px;
             border-spacing: 2px;
             border-left: 3px solid #137D60;
-            box-shadow: 2px 3px #f0eded;
+            box-shadow: 0 2px 9px 0 rgba(38, 38, 40, 0.06);
 
             .table-row {
                 display: flex;
@@ -263,7 +263,7 @@
                 .review-summary-table {
                     border: 1px solid #e2e2e2;
                     display: grid;
-                    border-radius: 5px;
+                    border-radius: 8px;
 
                     .review-summary-header {
                         display: flex;
@@ -476,7 +476,7 @@
                     margin-bottom: 20px;
                     border-spacing: 2px;
                     border-left: 3px solid #137D60;
-                    box-shadow: 2px 3px #f0eded;
+                    box-shadow: 0 2px 9px 0 rgba(38, 38, 40, 0.06);
 
                     .mobile-table-row {
                         display: grid;
@@ -670,7 +670,7 @@
                         .review-summary-table {
                             border: 1px solid #e2e2e2;
                             display: grid;
-                            border-radius: 5px;
+                            border-radius: 8px;
                             overflow: auto;
         
                             .review-summary-header {

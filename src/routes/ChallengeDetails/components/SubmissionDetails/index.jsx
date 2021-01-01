@@ -136,6 +136,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
 
         {type == "Design" && (
           <div styleName="table-head">
+            <div styleName="flex-1">#</div>
             <div styleName="flex-3">ID</div>
             <div styleName="flex-1">Type</div>
             <div styleName="flex-2">Submission Date</div>
@@ -150,6 +151,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
           mySubmissions.map((submission, index) => (
             <div styleName="row-expansion-wrapper" key={index}>
               <div styleName="table-row">
+                <div styleName="flex-1">{submission.rank}</div>
                 <div styleName="design-id-wrapper flex-3">
                   <button onClick={showModalHandler} styleName="modal-btn">
                     {submission.id}
@@ -191,7 +193,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 {submission.screening_status === "" && (
                   <div styleName="submission-screening flex-2">
                     <div styleName="status-notdefined">
-                      Not yet performanced
+                      Not yet performed
                     </div>
                   </div>
                 )}
@@ -271,6 +273,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
           ).map((submission, index) => (
             <div styleName="row-expansion-wrapper" key={index}>
               <div styleName="table-row">
+                <div styleName="flex-1">{submission.rank}</div>
                 <div styleName="design-id-wrapper flex-3">
                   <button onClick={showModalHandler} styleName="modal-btn">
                     {submission.id}
@@ -312,7 +315,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 {submission.screening_status === "" && (
                   <div styleName="submission-screening flex-2">
                     <div styleName="status-notdefined">
-                      Not yet performanced
+                      Not yet performed
                     </div>
                   </div>
                 )}
@@ -392,6 +395,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
           ).map((submission, index) => (
             <div styleName="row-expansion-wrapper" key={index}>
               <div styleName="table-row">
+                <div styleName="flex-1">{submission.rank}</div>
                 <div styleName="design-id-wrapper flex-3">
                   <button onClick={showModalHandler} styleName="modal-btn">
                     {submission.id}
@@ -433,7 +437,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 {submission.screening_status === "" && (
                   <div styleName="submission-screening flex-2">
                     <div styleName="status-notdefined">
-                      Not yet performanced
+                      Not yet performed
                     </div>
                   </div>
                 )}
@@ -767,6 +771,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
             mySubmissions.map((submission, index) => (
               <div styleName="mobile-row-expansion-wrapper" key={index}>
                 <div styleName="mobile-table-row">
+                  <div styleName="mobile-rank">#{submission.rank}</div>
                   <div styleName="submission-id-wrapper">
                     <div styleName="gray-divs">ID</div>
                     <div styleName="submission-ids">
@@ -794,7 +799,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                       <div>Screening Status</div>
                       {submission.screening_status === "" && (
                         <div styleName="status-notdefined">
-                          Not yet performanced
+                          Not yet performed
                         </div>
                       )}
                       {submission.screening_status === "pass" && (
@@ -898,6 +903,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
             ).map((submission, index) => (
               <div styleName="mobile-row-expansion-wrapper" key={index}>
                 <div styleName="mobile-table-row">
+                  <div styleName="mobile-rank">#{submission.rank}</div>
                   <div styleName="submission-id-wrapper">
                     <div styleName="gray-divs">ID</div>
                     <div styleName="submission-ids">
@@ -925,7 +931,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                       <div>Screening Status</div>
                       {submission.screening_status === "" && (
                         <div styleName="status-notdefined">
-                          Not yet performanced
+                          Not yet performed
                         </div>
                       )}
                       {submission.screening_status === "pass" && (
@@ -1029,6 +1035,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
             ).map((submission, index) => (
               <div styleName="mobile-row-expansion-wrapper" key={index}>
                 <div styleName="mobile-table-row">
+                  <div styleName="mobile-rank">#{submission.rank}</div>
                   <div styleName="submission-id-wrapper">
                     <div styleName="gray-divs">ID</div>
                     <div styleName="submission-ids">
@@ -1056,7 +1063,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                       <div>Screening Status</div>
                       {submission.screening_status === "" && (
                         <div styleName="status-notdefined">
-                          Not yet performanced
+                          Not yet performed
                         </div>
                       )}
                       {submission.screening_status === "pass" && (
@@ -1434,7 +1441,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
             ))}
         </div>
       </div>
-      {(role !== "Copilot" && !submissionCompleted) && (
+      {(role !== "Copilot" && !submissionCompleted && type !== "QA") && (
         <div styleName="add-submission-wrapper">
           <button styleName="submission-btn">ADD SUBMISSION</button>
         </div>
