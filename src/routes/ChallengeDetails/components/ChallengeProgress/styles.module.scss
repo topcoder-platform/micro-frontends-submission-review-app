@@ -50,6 +50,7 @@
         display: grid;
         background-color: #E9E9E9;
         padding: 16px;
+        border-radius: 0px 8px 8px 0px;
 
         .view-challenge {
             height: 30px;
@@ -72,6 +73,7 @@
     .progress-view-wrapper {
         display: grid;
         justify-content: unset;
+        margin-right: 20px;
 
         .view-challenge-wrapper {
             margin-top: 20px;
@@ -83,8 +85,12 @@
 @media (max-width: 1400px) {
     .challenge-progress-container {
         display: grid;
-        padding: 0px 0px 0px 20px;
+        padding: 0px 20px 0px 20px;
         justify-content: unset;
+    }
+
+    .progress-view-wrapper {
+        margin-right: 0px;
     }
 
     .purse-stats-wrapper {
@@ -98,6 +104,12 @@
 }
 
 @media (max-width: 1200px) {
+    .challenge-progress-container {
+        display: grid;
+        padding: 0px 0px 0px 20px;
+        justify-content: unset;
+    }
+
     .purse-stats-wrapper {
         display: grid;
         justify-content: flex-start;
@@ -111,6 +123,7 @@
         .view-challenge-wrapper {
             background-color: #E9E9E9;
             margin-left: -20px;
+            border-radius: 0px 0px 8px 8px;
         }
     }
 }
