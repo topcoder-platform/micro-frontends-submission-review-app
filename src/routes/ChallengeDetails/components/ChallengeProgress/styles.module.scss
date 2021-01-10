@@ -5,7 +5,7 @@
     justify-content: space-between;
     background-color: white;
     margin: 38px 0px;
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 0px 0px 0px 26px;
 }
 
@@ -23,8 +23,8 @@
 
             .purse-rank {
                 text-align: right;
-                color: #9f9fa9;
-                font-size: medium;
+                color: #555555;
+                font-size: 14px;
             }
 
             .purse-money {
@@ -38,6 +38,7 @@
     .stats-wrapper {
         display: grid;
         margin: 15px 0px;
+        font-size: 14px;
     }
 }
 
@@ -47,20 +48,22 @@
 
     .view-challenge-wrapper {
         display: grid;
-        background-color: #f4f9fe;
+        background-color: #E9E9E9;
         padding: 16px;
+        border-radius: 0px 8px 8px 0px;
 
         .view-challenge {
             height: 30px;
             border-radius: 16px;
             border: 0px;
-            background-color: #458061;
+            background-color: #137860;
             color: white;
             padding: 0px 19px;
             font-weight: 600;
             margin: auto;
             outline: none;
             cursor: pointer;
+            font-family: 'Roboto';
         }
     }
 
@@ -70,6 +73,7 @@
     .progress-view-wrapper {
         display: grid;
         justify-content: unset;
+        margin-right: 20px;
 
         .view-challenge-wrapper {
             margin-top: 20px;
@@ -81,8 +85,12 @@
 @media (max-width: 1400px) {
     .challenge-progress-container {
         display: grid;
-        padding: 0px 0px 0px 20px;
+        padding: 0px 20px 0px 20px;
         justify-content: unset;
+    }
+
+    .progress-view-wrapper {
+        margin-right: 0px;
     }
 
     .purse-stats-wrapper {
@@ -96,6 +104,12 @@
 }
 
 @media (max-width: 1200px) {
+    .challenge-progress-container {
+        display: grid;
+        padding: 0px 0px 0px 20px;
+        justify-content: unset;
+    }
+
     .purse-stats-wrapper {
         display: grid;
         justify-content: flex-start;
@@ -107,8 +121,9 @@
 
     .progress-view-wrapper {
         .view-challenge-wrapper {
-            background-color: #f4f9fe;
+            background-color: #E9E9E9;
             margin-left: -20px;
+            border-radius: 0px 0px 8px 8px;
         }
     }
 }

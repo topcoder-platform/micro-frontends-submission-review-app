@@ -2,7 +2,7 @@
 
 .submission-details-container {
     background-color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     display: grid;
 
     .submission-details-tabs-design-copilot {
@@ -53,15 +53,16 @@
             padding-left: 40px;
 
             div {
-                color: #808080;
+                color: #2A2A2A;
+                font-size: 14px;
             }
         }
 
         .row-expansion-wrapper {
             margin-bottom: 20px;
             border-spacing: 2px;
-            border-left: 3px solid #67ba8a;
-            box-shadow: 2px 3px #f0eded;
+            border-left: 3px solid #137D60;
+            box-shadow: 0 2px 9px 0 rgba(38, 38, 40, 0.06);
 
             .table-row {
                 display: flex;
@@ -77,48 +78,60 @@
                     display: grid;
 
                     .status-warning-text {
-                        color: #e87921;
-                        margin: 5px 0px 0px 12px;
+                        color: #F46500;
+                        margin: 5px 0px 0px 20px;
+                        font-size: 14px;
                     }
 
                     .status-pass {
                         background-color: #74c806;
                         color: white;
-                        padding: 9px 25px;
+                        padding: 10px 25px 0px 25px;
                         border-radius: 25px;
                         font-weight: 500;
                         width: 60px;
                         text-align: center;
                         margin: auto 0px;
+                        height: 26px;
+                        font-family: 'Roboto';
+                        font-size: 14px;
                     }
 
                     .status-fail {
-                        background-color: #e35023;
+                        background-color: #EF476F;
                         color: white;
-                        padding: 9px 25px;
+                        padding: 10px 25px 0px 25px;
                         border-radius: 25px;
                         font-weight: 500;
                         width: 60px;
                         text-align: center;
                         margin: auto 0px;
+                        height: 26px;
+                        font-family: 'Roboto';
+                        font-size: 14px;
                     }
 
                     .status-warning {
-                        background-color: #e87921;
+                        background-color: #FD7D01;
                         color: white;
-                        padding: 9px 25px;
+                        padding: 10px 25px 0px 25px;
                         border-radius: 25px;
                         font-weight: 500;
                         width: 60px;
                         text-align: center;
                         margin: auto 0px;
+                        height: 26px;
+                        font-family: 'Roboto';
+                        font-size: 14px;
                     }
 
                     .status-notdefined {
                         color: #999999;
-                        font-weight: 600;
+                        font-weight: 500;
                         margin: auto 0px;
                         font-style: italic;
+                        font-size: 16px;
+                        font-family: 'Roboto';
                     }
                 }
 
@@ -165,7 +178,7 @@
 
                     .design-short-id {
                         margin-top: 7px;
-                        color: #808080;
+                        color: #2A2A2A;
                         margin-left: 0px;
                     }
                 }
@@ -250,7 +263,7 @@
                 .review-summary-table {
                     border: 1px solid #e2e2e2;
                     display: grid;
-                    border-radius: 5px;
+                    border-radius: 8px;
 
                     .review-summary-header {
                         display: flex;
@@ -340,7 +353,7 @@
                         }
 
                         .closed-status {
-                            background-color: #e35023;
+                            background-color: gray;
                             color: white;
                             padding: 8px 0px;
                             border-radius: 25px;
@@ -370,7 +383,7 @@
                         }
 
                         .closed-status {
-                            background-color: #e35023;
+                            background-color: gray;
                             color: white;
                             padding: 8px 0px;
                             border-radius: 25px;
@@ -435,14 +448,15 @@
     padding-left: 0px;
     font-size: medium;
     display: flex;
-    color: #3260dc;
+    color: #0D61BF;
     cursor: pointer;
     font-weight: 600;
+    font-family: 'Roboto';
 }
 
 @media (max-width: 1200px) {
     .gray-divs {
-        color: #808080;    
+        color: #2A2A2A;    
     }
 
     .submission-details-container {
@@ -461,8 +475,8 @@
                 .mobile-row-expansion-wrapper {        
                     margin-bottom: 20px;
                     border-spacing: 2px;
-                    border-left: 3px solid #67ba8a;
-                    box-shadow: 2px 3px #f0eded;
+                    border-left: 3px solid #137D60;
+                    box-shadow: 0 2px 9px 0 rgba(38, 38, 40, 0.06);
 
                     .mobile-table-row {
                         display: grid;
@@ -484,7 +498,7 @@
                                 justify-content: space-between;
 
                                 .design-short-id {
-                                    color: #808080;
+                                    color: #2A2A2A;
                                 }
                             }
                         }
@@ -512,9 +526,11 @@
 
                                 .status-notdefined {
                                     color: #999999;
-                                    font-weight: 600;
+                                    font-weight: 500;
                                     margin: auto 0px;
                                     font-style: italic;
+                                    font-size: 16px;
+                                    font-family: 'Roboto';
                                 }
 
                                 .warning-fail-cases {
@@ -522,8 +538,9 @@
                                     justify-content: flex-start;
 
                                     .status-warning-text {
-                                        color: #e87921;
-                                        margin: 0px 0px 0px 12px;
+                                        color: #F46500;
+                                        margin: 0px 0px 0px 10px;
+                                        font-size: 14px;
                                     }
 
                                     .status-fail-text {
@@ -653,7 +670,7 @@
                         .review-summary-table {
                             border: 1px solid #e2e2e2;
                             display: grid;
-                            border-radius: 5px;
+                            border-radius: 8px;
                             overflow: auto;
         
                             .review-summary-header {
@@ -747,7 +764,7 @@
                                 }
         
                                 .closed-status {
-                                    background-color: #e35023;
+                                    background-color: gray;
                                     color: white;
                                     padding: 8px 0px;
                                     border-radius: 25px;
@@ -778,7 +795,7 @@
                                 }
         
                                 .closed-status {
-                                    background-color: #e35023;
+                                    background-color: gray;
                                     color: white;
                                     padding: 8px 0px;
                                     border-radius: 25px;

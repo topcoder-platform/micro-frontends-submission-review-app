@@ -177,7 +177,8 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
 
   return (
     <div styleName="submission-details-container">
-      <SubmissionModal show={showModal} handleClose={closeModalHandler} />
+      {showModal && <SubmissionModal show={showModal} handleClose={closeModalHandler} />}
+      
 
       {role == "Copilot" && type == "Design" && !!mySubmissions && (
         <div styleName="submission-details-tabs-design-copilot">
@@ -232,6 +233,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
 
         {type == "Design" && (
           <div styleName="table-head">
+            <div styleName="flex-1">#</div>
             <div styleName="flex-3">ID</div>
             <div styleName="flex-1">Type</div>
             <div styleName="flex-2">Submission Date</div>
@@ -246,6 +248,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
           mySubmissions.map((submission, index) => (
             <div styleName="row-expansion-wrapper" key={index}>
               <div styleName="table-row">
+                <div styleName="flex-1">{submission.rank}</div>
                 <div styleName="design-id-wrapper flex-3">
                   <button onClick={showModalHandler} styleName="modal-btn">
                     {submission.id}
@@ -287,7 +290,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                 {submission.screening_status === "" && (
                   <div styleName="submission-screening flex-2">
                     <div styleName="status-notdefined">
-                      Not yet performanced
+                      Not yet performed
                     </div>
                   </div>
                 )}
@@ -370,6 +373,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
           ).map((submission, index) => (
             <div styleName="row-expansion-wrapper" key={index}>
               <div styleName="table-row">
+                <div styleName="flex-1">{submission.rank}</div>
                 <div styleName="design-id-wrapper flex-3">
                   <button onClick={showModalHandler} styleName="modal-btn">
                     {submission.id}
@@ -411,7 +415,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                 {submission.screening_status === "" && (
                   <div styleName="submission-screening flex-2">
                     <div styleName="status-notdefined">
-                      Not yet performanced
+                      Not yet performed
                     </div>
                   </div>
                 )}
@@ -420,7 +424,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                   <div styleName="actions-icons">
                     <button styleName="expansion-button"
                       onClick={() => downloadFile(submission.id)}>
-                      <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                     </button>
                     {submissionId === submission.short_id ? (
                       <button
@@ -494,6 +498,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
           ).map((submission, index) => (
             <div styleName="row-expansion-wrapper" key={index}>
               <div styleName="table-row">
+                <div styleName="flex-1">{submission.rank}</div>
                 <div styleName="design-id-wrapper flex-3">
                   <button onClick={showModalHandler} styleName="modal-btn">
                     {submission.id}
@@ -535,7 +540,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                 {submission.screening_status === "" && (
                   <div styleName="submission-screening flex-2">
                     <div styleName="status-notdefined">
-                      Not yet performanced
+                      Not yet performed
                     </div>
                   </div>
                 )}
@@ -544,7 +549,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                   <div styleName="actions-icons">
                     <button styleName="expansion-button"
                       onClick={() => downloadFile(submission.id)}>
-                      <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                     </button>
                     {submissionId === submission.short_id ? (
                       <button
@@ -633,7 +638,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                     <View styleName="view-button" />
                     <button styleName="expansion-button"
                       onClick={() => downloadFile(submission.id)}>
-                      <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                     </button>
                     {submissionId === submission.short_id ? (
                       <button
@@ -875,6 +880,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
             mySubmissions.map((submission, index) => (
               <div styleName="mobile-row-expansion-wrapper" key={index}>
                 <div styleName="mobile-table-row">
+                  <div styleName="mobile-rank">#{submission.rank}</div>
                   <div styleName="submission-id-wrapper">
                     <div styleName="gray-divs">ID</div>
                     <div styleName="submission-ids">
@@ -902,7 +908,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                       <div>Screening Status</div>
                       {submission.screening_status === "" && (
                         <div styleName="status-notdefined">
-                          Not yet performanced
+                          Not yet performed
                         </div>
                       )}
                       {submission.screening_status === "pass" && (
@@ -955,7 +961,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                     )}
                     <button styleName="expansion-button"
                       onClick={() => downloadFile(submission.id)}>
-                      <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                     </button>
                   </div>
                 </div>
@@ -1009,6 +1015,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
             ).map((submission, index) => (
               <div styleName="mobile-row-expansion-wrapper" key={index}>
                 <div styleName="mobile-table-row">
+                  <div styleName="mobile-rank">#{submission.rank}</div>
                   <div styleName="submission-id-wrapper">
                     <div styleName="gray-divs">ID</div>
                     <div styleName="submission-ids">
@@ -1036,7 +1043,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                       <div>Screening Status</div>
                       {submission.screening_status === "" && (
                         <div styleName="status-notdefined">
-                          Not yet performanced
+                          Not yet performed
                         </div>
                       )}
                       {submission.screening_status === "pass" && (
@@ -1089,7 +1096,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                     )}
                     <button styleName="expansion-button"
                       onClick={() => downloadFile(submission.id)}>
-                      <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                     </button>
                   </div>
                 </div>
@@ -1143,6 +1150,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
             ).map((submission, index) => (
               <div styleName="mobile-row-expansion-wrapper" key={index}>
                 <div styleName="mobile-table-row">
+                  <div styleName="mobile-rank">#{submission.rank}</div>
                   <div styleName="submission-id-wrapper">
                     <div styleName="gray-divs">ID</div>
                     <div styleName="submission-ids">
@@ -1170,7 +1178,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                       <div>Screening Status</div>
                       {submission.screening_status === "" && (
                         <div styleName="status-notdefined">
-                          Not yet performanced
+                          Not yet performed
                         </div>
                       )}
                       {submission.screening_status === "pass" && (
@@ -1223,7 +1231,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                     )}
                     <button styleName="expansion-button"
                       onClick={() => downloadFile(submission.id)}>
-                      <Download style={{ cursor: 'pointer' }}/>
+                    <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                     </button>
                   </div>
                 </div>
@@ -1333,7 +1341,7 @@ const SubmissionDetails = ({ challengeId, type, role }) => {
                       <View styleName="view-button" />
                       <button styleName="expansion-button"
                         onClick={() => downloadFile(submission.id)}>
-                        <Download style={{ cursor: 'pointer' }}/>
+                      <Download style={{ cursor: 'pointer', height: '25px', width: '25px' }}/>
                       </button>
                     </div>
                   </div>
