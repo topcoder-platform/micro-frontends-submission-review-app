@@ -20,7 +20,8 @@ const ChallengesHeader = ({ title, onChangeFilter }) => {
             <select styleName="dropdown-select" onChange={onChangeFilter}>
               <option value=""> All </option>
               <option value="Submitter"> Submitter </option>
-              <option value="Copilot"> Co-Pilot </option>
+              <option value="Copilot"> Copilot </option>
+              <option value="Reviewer"> Reviewer </option>
             </select>
             <DownArrow styleName="down-arrow" />
           </div>
@@ -65,7 +66,7 @@ const ChallengesHeader = ({ title, onChangeFilter }) => {
 
 ChallengesHeader.propTypes = {
   title: PT.string,
-  onChangeFilter: PT.object,
+  onChangeFilter: PT.func,
 };
 
 export default ChallengesHeader;

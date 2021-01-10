@@ -7,18 +7,59 @@ import React, { useState } from "react";
 import LayoutContainer from "../../components/LayoutContainer";
 import PageHeader from "../../components/PageHeader";
 import ChallengesContainer from "./components/ChallengesContainer";
-import { useData } from "../../hooks/useData";
-import { getMyChallenges } from "../../services/challenges";
 import ChallengesHeader from "../../components/ChallengesHeader";
 import ChallengesList from "./components/ChallengesList";
 import LoadingIndicator from "../../components/LoadingIndicator";
-import challengesJson from "../../../local/mock-server/data/challenges.json";
+import { useData } from "../../hooks/useData";
+import { getMyChallenges } from "../../services/challenges";
+import {
+  getRelevantResourceRolesMap,
+  getRoles,
+  getMyChallengesForRelevantRoles,
+  getRelevantRoles,
+} from "../../services/resources";
+import { useAsync } from "react-use";
+import { decodeToken } from "@topcoder-platform/tc-auth-lib";
+import { getAuthUserTokens } from "@topcoder/micro-frontends-navbar-app";
+import _ from "lodash";
 
 const MyChallengesList = () => {
+  const authUserTokens = useAsync(getAuthUserTokens);
+  const tokenV3 = authUserTokens.value ? authUserTokens.value.tokenV3 : null;
+  const memberId = tokenV3 ? decodeToken(tokenV3).userId : null;
+  const [myChallenges, loadingError] = useData(
+    getMyChallenges,
+    tokenV3,
+    memberId
+  );
+  const [roles, roleLoadingError] = useData(getRoles, tokenV3);
+  const [loading, setLoading] = useState(true);
 
-  // Uncomment this whenever APIs are ready or whenever you want to use Mock Server, for now static jsons are loaded
-  // const [myChallenges, loadingError] = useData(getMyChallenges);
-  const [myChallenges, loadingError] = [challengesJson, ''];
+  const rolesMap = getRelevantResourceRolesMap(roles);
+
+  let myChallengesByRolesPromises = [];
+  if (rolesMap) {
+    const relevantRoles = getRelevantRoles();
+    myChallengesByRolesPromises = getMyChallengesForRelevantRoles(
+      tokenV3,
+      memberId,
+      rolesMap
+    );
+    const challengeToRoleMap = {};
+    Promise.all(myChallengesByRolesPromises).then((responses) => {
+      _.forEach(responses, (response, index) => {
+        _.forEach(response.data, (challengeId) => {
+          challengeToRoleMap[challengeId] = relevantRoles[index];
+        });
+      });
+
+      _.forEach(myChallenges, (challenge) => {
+        challenge["role"] = challengeToRoleMap[challenge.id] || "";
+      });
+      myChallenges && setLoading(false);
+    });
+  }
+
   const [filterRole, setFilterRole] = useState("");
 
   const changeFilterRoleHandler = (event) => {
@@ -37,17 +78,15 @@ const MyChallengesList = () => {
           title="Challenge Title"
           onChangeFilter={changeFilterRoleHandler}
         />
-        {!myChallenges && (
+        {(loading || !myChallenges) && (
           <LoadingIndicator error={loadingError && loadingError.toString()} />
         )}
-        {myChallenges && filterRole === "" && (
-          <ChallengesList challenges={myChallenges.challenges} />
+        {!loading && myChallenges && filterRole === "" && (
+          <ChallengesList challenges={myChallenges} />
         )}
-        {myChallenges && filterRole !== "" && (
+        {!loading && myChallenges && filterRole !== "" && (
           <ChallengesList
-            challenges={myChallenges.challenges.filter(
-              (x) => x["role"] === filterRole
-            )}
+            challenges={myChallenges.filter((x) => x["role"] === filterRole)}
           />
         )}
       </ChallengesContainer>

@@ -11,9 +11,106 @@ import Download from "../../../../assets/images/download.svg";
 import View from "../../../../assets/images/view.svg";
 import SubmissionModal from "../../../../components/SubmissionModal";
 import "./styles.module.scss";
+import _ from "lodash";
+import { useData } from "../../../../hooks/useData";
+import {
+  getSubmissionsByChallengeForMember,
+  downloadSubmission,
+} from "../../../../services/submissions";
+import { decodeToken } from "@topcoder-platform/tc-auth-lib";
+import { useAsync } from "react-use";
+import { getAuthUserTokens } from "@topcoder/micro-frontends-navbar-app";
 
-const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => {
-  const [mySubmissions, setMySubmissions] = useState(submissions);
+const SubmissionDetails = ({ challengeId, type, role }) => {
+  const authUserTokens = useAsync(getAuthUserTokens);
+  const tokenV3 = authUserTokens.value ? authUserTokens.value.tokenV3 : null;
+  const memberId = tokenV3 ? decodeToken(tokenV3).userId : null;
+  const [myChallengeSubmissions, loadingError] = useData(
+    getSubmissionsByChallengeForMember,
+    tokenV3,
+    challengeId,
+    memberId
+  );
+
+  /**
+   * Returns Date in the format 01 Sep 2019
+   * @param {String} Datetime
+   * @returns {String} Date
+   */
+  const generateDate = (dateTime) => {
+    if (!dateTime) {
+      return "";
+    }
+    return new Intl.DateTimeFormat("Default", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    }).format(new Date(dateTime));
+  };
+
+  /**
+   * Returns time in the format hh:mm:ss
+   * @param {String} Datetime
+   * @returns {String} Time
+   */
+  const generateTime = (dateTime) => {
+    if (!dateTime) {
+      return "";
+    }
+    return new Intl.DateTimeFormat("Default", {
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    }).format(new Date(dateTime));
+  };
+
+  /**
+   *
+   * @param {Object} myChallengeSubmissions
+   * @returns {Object} Simplified challenge submissions data
+   */
+  const generateMySubmissions = (myChallengeSubmissions) => {
+    return _.map(myChallengeSubmissions, (myChallengeSubmission, index) => {
+      return {
+        id: myChallengeSubmission.id,
+        rank: myChallengeSubmissions.length - index,
+        submission_date: generateDate(myChallengeSubmission.submittedDate),
+        submission_time: generateTime(myChallengeSubmission.submittedDate),
+        review_date:
+          myChallengeSubmission.review.length > 0
+            ? generateDate(myChallengeSubmission.review[0].reviewedDate)
+            : "N/A",
+        review_time:
+          myChallengeSubmission.review.length > 0
+            ? generateTime(myChallengeSubmission.review[0].reviewedDate)
+            : "",
+        review_score:
+          myChallengeSubmission.review.length > 0
+            ? myChallengeSubmission.review[0].score
+            : "N/A",
+        type: myChallengeSubmission.type,
+      };
+    });
+  };
+
+  /**
+   *
+   * @param {String} submissionId submission Id
+   * @returns Triggers file download for submissionId
+   */
+  const downloadFile = (submissionId) => {
+    downloadSubmission(tokenV3, submissionId).then((response) => {
+      const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.setAttribute("download", submissionId + ".zip");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    });
+  };
+
+  const mySubmissions = generateMySubmissions(myChallengeSubmissions);
   const [submissionId, setSubmissionId] = useState(-1);
   const [viewSummary, setViewSummary] = useState(true);
   const [viewLogs, setViewLogs] = useState(false);
@@ -86,7 +183,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
         <div styleName="submission-details-tabs-design-copilot">
           {viewCheckpoint && (
             <button styleName="design-copilot-active-tab" >Checkpoint ({mySubmissions.filter(
-              (x) => x['type'] === 'Checkpoint'
+              (x) => _.includes(x['type'], 'Checkpoint')
             ).length})</button>
           )}
           {!viewCheckpoint && (
@@ -96,13 +193,13 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 handleCopilotDesignTabs("Checkpoint")
               }
             >Checkpoint ({mySubmissions.filter(
-              (x) => x['type'] === 'Checkpoint'
+              (x) => _.includes(x['type'], 'Checkpoint')
             ).length})</button>
           )}
           
           {viewFinal && (
             <button styleName="design-copilot-active-tab" >Final ({mySubmissions.filter(
-              (x) => x['type'] === 'Final'
+              (x) => _.includes(x['type'], 'Final')
             ).length})</button>
           )}
           {!viewFinal && (
@@ -112,21 +209,21 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 handleCopilotDesignTabs("Final")
               }
             >Final ({mySubmissions.filter(
-              (x) => x['type'] === 'Final'
+              (x) => _.includes(x['type'],'Final')
             ).length})</button>
           )}
         </div>
       )}
 
       <div styleName="submission-details-table">
-        {(type == "Development" || type == "Data" || type == "QA") && (
+        {(type == "Development" || type == "Data" || type == "Quality Assurance") && (
           <div styleName="table-head">
             <div styleName="flex-1">#</div>
             <div styleName="flex-3">ID</div>
-            {type !== "QA" && <div styleName="flex-3">Review Date</div>}
-            {type === "QA" && <div styleName="flex-3">Submission Date</div>}
-            {type !== "QA" && <div styleName="flex-3">Review Score</div>}
-            {type === "QA" && (
+            {type !== "Quality Assurance" && <div styleName="flex-3">Review Date</div>}
+            {type === "Quality Assurance" && <div styleName="flex-3">Submission Date</div>}
+            {type !== "Quality Assurance" && <div styleName="flex-3">Review Score</div>}
+            {type === "Quality Assurance" && (
               <div styleName="flex-3">Initial Score / Final Score</div>
             )}
             <div styleName="flex-1">Actions</div>
@@ -197,7 +294,10 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 <div styleName="flex-2">{submission.review_score}</div>
                 <div styleName="actions-icons-wrapper flex-1">
                   <div styleName="actions-icons">
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <button styleName="expansion-button"
+                      onClick={() => downloadFile(submission.id)}>
+                      <Download style={{ cursor: 'pointer' }}/>
+                    </button>
                     {submissionId === submission.short_id ? (
                       <button
                         styleName="expansion-button"
@@ -266,7 +366,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
         {!!mySubmissions &&
           type === "Design" && role === "Copilot" && viewCheckpoint &&
           mySubmissions.filter(
-            (x) => x['type'] === 'Checkpoint'
+            (x) => _.includes(x['type'], 'Checkpoint')
           ).map((submission, index) => (
             <div styleName="row-expansion-wrapper" key={index}>
               <div styleName="table-row">
@@ -318,7 +418,10 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 <div styleName="flex-2">{submission.review_score}</div>
                 <div styleName="actions-icons-wrapper flex-1">
                   <div styleName="actions-icons">
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <button styleName="expansion-button"
+                      onClick={() => downloadFile(submission.id)}>
+                      <Download style={{ cursor: 'pointer' }}/>
+                    </button>
                     {submissionId === submission.short_id ? (
                       <button
                         styleName="expansion-button"
@@ -387,7 +490,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
         {!!mySubmissions &&
           type === "Design" && role === "Copilot" && viewFinal &&
           mySubmissions.filter(
-            (x) => x['type'] === 'Final'
+            (x) => _.includes(x['type'], 'Final')
           ).map((submission, index) => (
             <div styleName="row-expansion-wrapper" key={index}>
               <div styleName="table-row">
@@ -439,7 +542,10 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 <div styleName="flex-2">{submission.review_score}</div>
                 <div styleName="actions-icons-wrapper flex-1">
                   <div styleName="actions-icons">
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <button styleName="expansion-button"
+                      onClick={() => downloadFile(submission.id)}>
+                      <Download style={{ cursor: 'pointer' }}/>
+                    </button>
                     {submissionId === submission.short_id ? (
                       <button
                         styleName="expansion-button"
@@ -506,7 +612,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
           ))}
 
         {!!mySubmissions &&
-          (type === "Development" || type === "Data" || type === "QA") &&
+          (type === "Development" || type === "Data" || type === "Quality Assurance") &&
           mySubmissions.map((submission, index) => (
             <div styleName="row-expansion-wrapper" key={index}>
               <div styleName="table-row">
@@ -525,7 +631,10 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                 <div styleName="actions-icons-wrapper flex-1">
                   <div styleName="actions-icons-dev">
                     <View styleName="view-button" />
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <button styleName="expansion-button"
+                      onClick={() => downloadFile(submission.id)}>
+                      <Download style={{ cursor: 'pointer' }}/>
+                    </button>
                     {submissionId === submission.short_id ? (
                       <button
                         styleName="expansion-button"
@@ -584,17 +693,17 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                       <div styleName="review-summary-header">
                         <div styleName="flex-3">Review Type</div>
                         <div styleName="flex-2">Reviewer</div>
-                        {type === "QA" && (
+                        {type === "Quality Assurance" && (
                           <div styleName="flex-2">Initial Score</div>
                         )}
-                        {type !== "QA" && <div styleName="flex-2">Score</div>}
-                        {type !== "Data" && type !== "QA" && (
+                        {type !== "Quality Assurance" && <div styleName="flex-2">Score</div>}
+                        {type !== "Data" && type !== "Quality Assurance" && (
                           <div styleName="flex-2">Appeal</div>
                         )}
-                        {type !== "QA" && (
+                        {type !== "Quality Assurance" && (
                           <div styleName="status-header flex-1">Status</div>
                         )}
-                        {type === "QA" && (
+                        {type === "Quality Assurance" && (
                           <div styleName="status-header flex-1">
                             Final Score
                           </div>
@@ -614,30 +723,30 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                               <div styleName="flex-2">
                                 {review_summary.score}
                               </div>
-                              {type !== "Data" && type !== "QA" && (
+                              {type !== "Data" && type !== "Quality Assurance" && (
                                 <div styleName="flex-2">
                                   {review_summary.appeal}
                                 </div>
                               )}
-                              {type === "QA" && (
+                              {type === "Quality Assurance" && (
                                 <div styleName="na-status flex-1">
                                   {review_summary.final_score}
                                 </div>
                               )}
                               {review_summary.status === "open" &&
-                                type !== "QA" && (
+                                type !== "Quality Assurance" && (
                                   <div styleName="open-status flex-1">
                                     {review_summary.status}
                                   </div>
                                 )}
                               {review_summary.status === "closed" &&
-                                type !== "QA" && (
+                                type !== "Quality Assurance" && (
                                   <div styleName="closed-status flex-1">
                                     {review_summary.status}
                                   </div>
                                 )}
                               {review_summary.status === "N/A" &&
-                                type !== "QA" && (
+                                type !== "Quality Assurance" && (
                                   <div styleName="na-status flex-1">
                                     {review_summary.status}
                                   </div>
@@ -652,34 +761,34 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                         <div styleName="flex-2">
                           {submission.review_summary.final_score.score}
                         </div>
-                        {type !== "Data" && type !== "QA" && (
+                        {type !== "Data" && type !== "Quality Assurance" && (
                           <div styleName="flex-2">
                             {submission.review_summary.final_score.appeal}
                           </div>
                         )}
 
-                        {type === "QA" && (
+                        {type === "Quality Assurance" && (
                           <div styleName="na-status flex-1">
                             {submission.review_summary.final_score.final_score}
                           </div>
                         )}
                         {submission.review_summary.final_score.status ===
                           "open" &&
-                          type !== "QA" && (
+                          type !== "Quality Assurance" && (
                             <div styleName="open-status flex-1">
                               {submission.review_summary.final_score.status}
                             </div>
                           )}
                         {submission.review_summary.final_score.status ===
                           "closed" &&
-                          type !== "QA" && (
+                          type !== "Quality Assurance" && (
                             <div styleName="closed-status flex-1">
                               {submission.review_summary.final_score.status}
                             </div>
                           )}
                         {submission.review_summary.final_score.status ===
                           "N/A" &&
-                          type !== "QA" && (
+                          type !== "Quality Assurance" && (
                             <div styleName="flex-1">
                               {submission.review_summary.final_score.status}
                             </div>
@@ -844,7 +953,10 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                         <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <button styleName="expansion-button"
+                      onClick={() => downloadFile(submission.id)}>
+                      <Download style={{ cursor: 'pointer' }}/>
+                    </button>
                   </div>
                 </div>
 
@@ -893,7 +1005,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
           {!!mySubmissions &&
             type === "Design" && role === "Copilot" && viewCheckpoint &&
             mySubmissions.filter(
-              (x) => x['type'] === 'Checkpoint'
+              (x) => _.includes(x['type'], 'Checkpoint')
             ).map((submission, index) => (
               <div styleName="mobile-row-expansion-wrapper" key={index}>
                 <div styleName="mobile-table-row">
@@ -975,7 +1087,10 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                         <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <button styleName="expansion-button"
+                      onClick={() => downloadFile(submission.id)}>
+                      <Download style={{ cursor: 'pointer' }}/>
+                    </button>
                   </div>
                 </div>
 
@@ -1024,7 +1139,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
           {!!mySubmissions &&
             type === "Design" && role === "Copilot" && viewFinal &&
             mySubmissions.filter(
-              (x) => x['type'] === 'Final'
+              (x) => _.includes(x['type'], 'Final')
             ).map((submission, index) => (
               <div styleName="mobile-row-expansion-wrapper" key={index}>
                 <div styleName="mobile-table-row">
@@ -1106,7 +1221,10 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                         <DownArrow style={{ cursor: 'pointer' }}/>
                       </button>
                     )}
-                    <Download style={{ cursor: 'pointer' }}/>
+                    <button styleName="expansion-button"
+                      onClick={() => downloadFile(submission.id)}>
+                      <Download style={{ cursor: 'pointer' }}/>
+                    </button>
                   </div>
                 </div>
 
@@ -1153,7 +1271,7 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
             ))}
 
           {!!mySubmissions &&
-            (type === "Development" || type === "Data" || type === "QA") &&
+            (type === "Development" || type === "Data" || type === "Quality Assurance") &&
             mySubmissions.map((submission, index) => (
               <div styleName="mobile-row-expansion-wrapper" key={index}>
                 <div styleName="mobile-table-row">
@@ -1178,10 +1296,10 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                     </div>
 
                     <div styleName="submission-score-wrapper">
-                      {type !== "QA" && (
+                      {type !== "Quality Assurance" && (
                         <div styleName="gray-divs">Review Score</div>
                       )}
-                      {type === "QA" && (
+                      {type === "Quality Assurance" && (
                         <div styleName="gray-divs">
                           Initial Score / Final Score
                         </div>
@@ -1213,7 +1331,10 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                     )}
                     <div styleName="actions-icons-dev">
                       <View styleName="view-button" />
-                      <Download style={{ cursor: 'pointer' }}/>
+                      <button styleName="expansion-button"
+                        onClick={() => downloadFile(submission.id)}>
+                        <Download style={{ cursor: 'pointer' }}/>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -1253,17 +1374,17 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                         <div styleName="review-summary-header">
                           <div styleName="flex-3">Review Type</div>
                           <div styleName="flex-2">Reviewer</div>
-                          {type === "QA" && (
+                          {type === "Quality Assurance" && (
                             <div styleName="flex-2">Initial Score</div>
                           )}
-                          {type !== "QA" && <div styleName="flex-2">Score</div>}
-                          {type !== "Data" && type !== "QA" && (
+                          {type !== "Quality Assurance" && <div styleName="flex-2">Score</div>}
+                          {type !== "Data" && type !== "Quality Assurance" && (
                             <div styleName="flex-2">Appeal</div>
                           )}
-                          {type !== "QA" && (
+                          {type !== "Quality Assurance" && (
                             <div styleName="status-header flex-1">Status</div>
                           )}
-                          {type === "QA" && (
+                          {type === "Quality Assurance" && (
                             <div styleName="status-header flex-1">
                               Final Score
                             </div>
@@ -1283,30 +1404,30 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                                 <div styleName="flex-2">
                                   {review_summary.score}
                                 </div>
-                                {type !== "Data" && type !== "QA" && (
+                                {type !== "Data" && type !== "Quality Assurance" && (
                                   <div styleName="flex-2">
                                     {review_summary.appeal}
                                   </div>
                                 )}
-                                {type === "QA" && (
+                                {type === "Quality Assurance" && (
                                   <div styleName="na-status flex-1">
                                     {review_summary.final_score}
                                   </div>
                                 )}
                                 {review_summary.status === "open" &&
-                                  type !== "QA" && (
+                                  type !== "Quality Assurance" && (
                                     <div styleName="open-status flex-1">
                                       {review_summary.status}
                                     </div>
                                   )}
                                 {review_summary.status === "closed" &&
-                                  type !== "QA" && (
+                                  type !== "Quality Assurance" && (
                                     <div styleName="closed-status flex-1">
                                       {review_summary.status}
                                     </div>
                                   )}
                                 {review_summary.status === "N/A" &&
-                                  type !== "QA" && (
+                                  type !== "Quality Assurance" && (
                                     <div styleName="na-status flex-1">
                                       {review_summary.status}
                                     </div>
@@ -1321,13 +1442,13 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                           <div styleName="flex-2">
                             {submission.review_summary.final_score.score}
                           </div>
-                          {type !== "Data" && type !== "QA" && (
+                          {type !== "Data" && type !== "Quality Assurance" && (
                             <div styleName="flex-2">
                               {submission.review_summary.final_score.appeal}
                             </div>
                           )}
 
-                          {type === "QA" && (
+                          {type === "Quality Assurance" && (
                             <div styleName="na-status flex-1">
                               {
                                 submission.review_summary.final_score
@@ -1337,21 +1458,21 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
                           )}
                           {submission.review_summary.final_score.status ===
                             "open" &&
-                            type !== "QA" && (
+                            type !== "Quality Assurance" && (
                               <div styleName="open-status flex-1">
                                 {submission.review_summary.final_score.status}
                               </div>
                             )}
                           {submission.review_summary.final_score.status ===
                             "closed" &&
-                            type !== "QA" && (
+                            type !== "Quality Assurance" && (
                               <div styleName="closed-status flex-1">
                                 {submission.review_summary.final_score.status}
                               </div>
                             )}
                           {submission.review_summary.final_score.status ===
                             "N/A" &&
-                            type !== "QA" && (
+                            type !== "Quality Assurance" && (
                               <div styleName="flex-1">
                                 {submission.review_summary.final_score.status}
                               </div>
@@ -1433,20 +1554,19 @@ const SubmissionDetails = ({ type, role, submissionCompleted, submissions }) => 
             ))}
         </div>
       </div>
-      {(role !== "Copilot" && !submissionCompleted) && (
+      {/* {(role !== "Copilot" && !submissionCompleted) && (
         <div styleName="add-submission-wrapper">
           <button styleName="submission-btn">ADD SUBMISSION</button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
 
 SubmissionDetails.propTypes = {
+  challengeId : PT.string,
   type: PT.string,
   role: PT.string,
-  submissionCompleted: PT.bool,
-  submissions: PT.array,
 };
 
 export default SubmissionDetails;

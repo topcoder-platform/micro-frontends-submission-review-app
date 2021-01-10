@@ -7,8 +7,67 @@ import React from "react";
 import PT from "prop-types";
 import Check from "../../assets/images/check.svg";
 import "./styles.module.scss";
+import _ from "lodash";
 
-const ProgressBar = ({ progress }) => {
+const ProgressBar = ({ phases, currentPhases }) => {
+  /**
+   * Calculates the percentage progress of the progress bar
+   * @param {*} phases
+   * @param {*} currentPhases
+   * @returns {number} progressPercent
+   */
+  const generateProgressPercentage = (phases, currentPhases) => {
+    const percentagePerPhase = 100 / (phases.length - 1);
+    let progressPercent = 0;
+    _.forEach(phases, (phase, index) => {
+      if (index === 0) {
+        // The first phase need not contribute to percentage on the progress bar
+        return; // to make forEach continue
+      }
+      if (phase.scheduledEndDate < new Date()) {
+        // if a phase has already passed add its entire percentage to the progress bar
+        progressPercent += percentagePerPhase;
+        return; // to make forEach continue
+      } else if (_.includes(currentPhases, phase.name)) {
+        progressPercent +=
+          ((new Date() - new Date(phase.scheduledStartDate)) /
+            (phase.duration * 1000)) *
+          percentagePerPhase;
+      }
+    });
+    return progressPercent;
+  };
+
+  /**
+   * Generate progress data from challenge phases data
+   * @param {Object} phases
+   * @param {Object} currentPhases
+   * @returns {Object} progress
+   */
+  const generateProgress = (phases, currentPhases) => {
+    const progressBar = _.map(phases, (phase, index) => {
+      return {
+        name: phase.name,
+        deadline: new Intl.DateTimeFormat("Default", {
+          month: "short",
+          day: "2-digit",
+          hour: "numeric",
+          minute: "numeric",
+        }).format(new Date(phase.scheduledEndDate)),
+        completed: new Date(phase.scheduledEndDate) < new Date() || index === 0, // mark phase completed if date passed or registration phase
+      };
+    });
+    const currentPhase = _.last(currentPhases); // takes the current phase, If both Register and Submission are present take Submission
+    const progressPercent = generateProgressPercentage(phases, currentPhases);
+    const progress = {
+      progressBar: progressBar,
+      currentPhase: currentPhase,
+      progressPercent: progressPercent,
+    };
+    return progress;
+  };
+
+  const progress = generateProgress(phases, currentPhases);
   const progressBar = progress.progressBar;
 
   return (

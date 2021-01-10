@@ -15,7 +15,6 @@ export default function Root() {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>Submission Review Placeholder</h1>
       <ChallengeDetailsProvider>
         <div styleName="micro-frontends-submission-review-app">
           <Router>

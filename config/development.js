@@ -1,8 +1,11 @@
 module.exports = {
   /**
-   * Insert the URL of APIs, whenever they are ready.
+   * API URLs.
    */
-  TC_CHALLENGES_SERVICE_URL: "http://local.topcoder-dev.com:8504/api",
+
+  TC_CHALLENGES_SERVICE_URL: "https://api.topcoder-dev.com/v5",
+  TC_SUBMISSIONS_SERVICE_URL: "https://api.topcoder-dev.com/v5",
+  TC_RESOURCES_SERVICE_URL: "https://api.topcoder-dev.com/v5",
 
   /**
    * URL of Topcoder Community Website
