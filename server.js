@@ -3,7 +3,8 @@ const express = require("express");
 
 const app = express();
 
-app.use('/submissionreview', 
+app.use(
+  "/",
   express.static("./dist", {
     setHeaders: function setHeaders(res) {
       res.header("Access-Control-Allow-Origin", "*");
@@ -15,11 +16,10 @@ app.use('/submissionreview',
     },
   })
 );
+app.get("/", function (req, res) {
+  res.send("alive");
+});
 
-app.get('/', function (req, res) {
-  res.send('alive')
-})
-
-const PORT = process.env.PORT || 8503;
+const PORT = process.env.PORT || 8011;
 app.listen(PORT);
 console.log(`App is hosted on port ${PORT}.`); // eslint-disable-line no-console

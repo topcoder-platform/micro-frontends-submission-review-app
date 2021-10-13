@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="16" viewBox="0 0 13 16">
+  <g id="Shape" transform="translate(0.5 0.5)" opacity="0.632">
+    <path id="Shape-2" data-name="Shape" d="M9,0h1.5A1.473,1.473,0,0,1,12,1.444V11.556A1.473,1.473,0,0,1,10.5,13h-9A1.473,1.473,0,0,1,0,11.556V1.444A1.473,1.473,0,0,1,1.5,0H3" transform="translate(0 2)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Rectangle-path" d="M1,0H5A1,1,0,0,1,6,1V2A1,1,0,0,1,5,3H1A1,1,0,0,1,0,2V1A1,1,0,0,1,1,0Z" transform="translate(3)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+  </g>
+</svg>

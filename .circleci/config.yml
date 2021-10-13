@@ -28,18 +28,21 @@ builddeploy_steps: &builddeploy_steps
   - setup_remote_docker
   - run: *install_dependency
   - run: *install_deploysuite
-  - run: 
+  - restore_cache: *restore_cache_settings_for_build
+  - run:
       command: |
         ./awsconfiguration.sh $DEPLOY_ENV
         source awsenvconf
         ./buildenv.sh -e $DEPLOY_ENV -b ${LOGICAL_ENV}-${APPNAME}-buildvar
-  - run: 
+  - run:
       command: |
         source buildenvvar
-        ./build.sh ${APPNAME} 
+        ./build.sh ${APPNAME}
+  #- save_cache: *save_cache_settings
   - deploy:
       name: Running MasterScript.
       command: |
+        ./awsconfiguration.sh $DEPLOY_ENV
         source awsenvconf
         ./buildenv.sh -e $DEPLOY_ENV -b ${LOGICAL_ENV}-${APPNAME}-deployvar
         source buildenvvar
@@ -73,7 +76,7 @@ workflows:
           filters:
             branches:
               only:
-                - feature/deployment
+                - dev
 
       # Production builds are exectuted only on tagged commits to the
       # master branch.

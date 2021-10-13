@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="25" viewBox="0 0 28 25">
+  <g id="Rectangle-path" transform="translate(1 1)">
+    <path id="Rectangle-path-2" data-name="Rectangle-path" d="M0,0H26V23H0Z" fill="#fff" stroke="#2a2a2a" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="Rectangle_6" data-name="Rectangle 6" d="M0,0H24.267V2.654H0Z" transform="translate(0.867 0.885)" fill="#c1f5e7"/>
+    <path id="Shape" d="M0,0H26" transform="translate(0 4.423)" fill="none" stroke="#2a2a2a" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="Shape-2" data-name="Shape" d="M0,0V4.423" transform="translate(5.2)" fill="none" stroke="#2a2a2a" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="Shape-3" data-name="Shape" d="M2.6,0,0,2.654,2.6,5.308" transform="translate(6.933 10.615)" fill="none" stroke="#07d6a0" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="Shape-4" data-name="Shape" d="M0,0,2.6,2.654,0,5.308" transform="translate(16.467 10.615)" fill="none" stroke="#07d6a0" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+</svg>

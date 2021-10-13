@@ -1,0 +1,19 @@
+@import '../../styles/includes';
+
+.challengeDetails {
+
+}
+
+.infoContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 22px;
+  padding: 0 30px 0 34px;
+}
+
+.hr {
+  height: 1px;
+  background-color: $dark-gray-80 !important;
+  margin-top: 22px;
+  margin-right: 30px;
+}

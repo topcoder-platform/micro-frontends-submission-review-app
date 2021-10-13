@@ -1,0 +1,87 @@
+@import "../../../styles/includes";
+
+.item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  height: 100%;
+  &:hover {
+    cursor: pointer;
+    background-color: $lighter-gray;
+  }
+
+  .block {
+    color: $text-color;
+    margin-bottom: 3px;
+  }
+
+  .light-text {
+    color: $light-text;
+  }
+}
+
+
+
+.icon {
+  vertical-align: bottom;
+}
+
+.faIcon {
+  color: $gray;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+
+.faIconContainer {
+  flex:1;
+  width: 100%;
+  display: flex;
+  justify-items: flex-end;
+  align-items: center;
+
+  span {
+    width: 100%;
+    flex-grow: 1;
+    flex-shrink: 0;
+    color: $text-color;
+  }
+}
+
+.col1 {
+  flex: 6;
+  flex-wrap: nowrap;
+  display: flex;
+
+  .name {
+    flex:1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  align-items: center;
+  padding-left: 20px;
+}
+
+.col2 {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.col3 {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.col4 {
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  padding-right: 20px;
+}

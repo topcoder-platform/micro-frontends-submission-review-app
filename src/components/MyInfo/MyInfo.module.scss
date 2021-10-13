@@ -1,0 +1,54 @@
+@import '../../styles/includes';
+
+.myInfo {
+  width: 361px;
+  border-radius: 5px;
+  border: 1px solid $dark-gray-80;
+}
+
+.table {
+  width: 100%;
+}
+
+.title {
+  @include roboto-medium;
+  font-size: 12px;
+  color: $light-gray-10;
+  border-bottom: 1px solid $inactive;
+  padding-left: 21px;
+  padding-top: 5.5px;
+}
+
+.header {
+  @include roboto-medium;
+  font-size: 12px;
+  color: $light-gray-20;
+  text-align: left;
+}
+
+.content {
+  @include roboto;
+  font-size: 12px;
+  color: $dark-gray-70;
+}
+
+.footer {
+  @include roboto;
+  font-size: 12px;
+  color: $dark-gray-70;
+  background-color: $dark-gray-60;
+}
+
+tr {
+  padding-top: 14.5px;
+
+  td:first-child, th:first-child {
+    padding-left: 21px;
+  }
+}
+
+td,th {
+  padding-top: 9px;
+  padding-bottom: 13px;
+  text-align: left;
+}

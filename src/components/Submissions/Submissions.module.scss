@@ -1,0 +1,67 @@
+@import '../../styles/includes';
+
+.submissions {
+  margin-top: 30px;
+  margin-left: 35px;
+  width: 94%;
+}
+
+.memberCol {
+  span {
+    width: 150px;
+    text-overflow: ellipsis;
+  }
+}
+
+.starIcon {
+  margin-right: 11px;
+}
+
+.head {
+  @include roboto-medium;
+  border-bottom: 1px solid $inactive;
+  font-size: 12px;
+  color: $light-gray-20;
+
+  .row1 {
+    max-width: 250px;
+    padding-left: 0;
+  }
+
+  .row2 {
+    max-width: 186px;
+    padding-left: 32px;
+  }
+
+  .row3 {
+    min-width: 186px;
+    padding-left: 53px;
+  }
+
+  .row4 {
+    min-width: 186px;
+    padding-left: 60px;
+  }
+
+  .row5 {
+    min-width: 186px;
+  }
+}
+
+td, .subhead {
+  @include roboto;
+  font-size: 12px;
+  color: $light-gray-20;
+}
+
+.blue {
+  color: $dark-blue-80;
+}
+
+.dark {
+  color: $dark-gray-70;
+}
+
+.odd {
+  background-color: $dark-gray-60;
+}

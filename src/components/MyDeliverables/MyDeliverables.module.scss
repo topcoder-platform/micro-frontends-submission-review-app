@@ -1,0 +1,26 @@
+@import '../../styles/includes';
+
+.deliverables {
+  width: 94%;
+  height: 82px;
+  border-radius: 5px;
+  border: 1px solid $dark-gray-80;
+  padding: 0 30px;
+  margin-top: 18px;
+  margin-bottom: 42px;
+  margin-left: 32px;
+
+  h3 {
+    @include roboto-medium;
+    font-size: 12px;
+    color: $light-gray-10;
+    margin-top: 10px;
+  }
+
+  p {
+    @include roboto;
+    font-size: 12px;
+    color: $dark-gray-70;
+    margin-top: 2px;
+  }
+}

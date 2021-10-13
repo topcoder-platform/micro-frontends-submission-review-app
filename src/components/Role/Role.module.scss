@@ -1,0 +1,19 @@
+@import '../../styles/includes';
+
+.roleContainer {
+  margin-left: 36px;
+  margin-top: 22px;
+}
+
+.role {
+  @include roboto-medium;
+  font-size: 12px;
+  color: $dark-gray-70;
+}
+
+.handle {
+  @include roboto-medium;
+  font-size: 12px;
+  color: $yellow;
+  margin-left: 10px;
+}

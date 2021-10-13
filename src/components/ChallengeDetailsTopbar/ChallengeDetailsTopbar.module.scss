@@ -1,0 +1,68 @@
+@import "../../styles/includes";
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  background-color: $white;
+  padding: 0 29.5px 0 8px;
+}
+
+.backArrow {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.backIcon {
+  vertical-align: middle;
+  color: $button-blue;
+  margin-left: 20px;
+  font-size: 12px;
+}
+
+.backText {
+  @include roboto-light;
+  color: $button-blue;
+  font-size: 12px;
+  margin-left: 8.5px;
+}
+
+.title {
+  @include roboto-medium;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  color: $dark-gray-30;
+
+  span {
+    font-size: 20px;
+  }
+}
+
+.rightContent {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.bellIcon {
+  margin-right: 30px;
+}
+
+.userIcon {
+  margin-right: 13px;
+}
+
+.role {
+  @include roboto;
+  font-size: 11px;
+  color: $dark-gray-40;
+  vertical-align: top;
+  margin-right: 10px;
+}
+
+.downIcon {
+  vertical-align: super;
+  cursor: pointer;
+}

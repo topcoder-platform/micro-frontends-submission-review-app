@@ -1,53 +1,60 @@
-# Topcoder Submission Review Micro-app
+# micro-frontends-submission-review-app
 
-## Complete Deployment
+# Topcoder Submission Review MFE App
 
-- For complete deployment, make sure to follow 'deployment.md' step by step
+This is a [single-spa](https://single-spa.js.org/) example React microapp.
+
+> NOTE. This application have been configured to be run as child app of a single-spa application. So while this app can be deployed and run independently, we would need some frame [single-spa](https://single-spa.js.org/) which would load it. While technically we can achieve running this app as standalone app it's strongly not recommended by the author of the `single-spa` approch, see this [GitHub Issue](https://github.com/single-spa/single-spa/issues/640) for details.
 
 ## Requirements
 
 - node - v10.22.1
 - npm - v6.14.6
 
-## Technology Stack
-
-- React 16.12
-- Router via [Reach Router](https://reach.tech/router/)
-- CSS Modules with SCSS via [babel-plugin-react-css-modules](https://github.com/gajus/babel-plugin-react-css-modules)
-- [React Inline SVG](https://github.com/airbnb/babel-plugin-inline-react-svg)
-
 ## NPM Commands
 
 | Command               | Description                                                       |
 | --------------------- | ----------------------------------------------------------------- |
 | `npm start`           | Run server which serves production ready build from `dist` folder |
-| `npm run dev`         | Run app in the development mode                                   |
-| `npm run dev-https`   | Run app in the development mode using HTTPS protocol              |
-| `npm run build`       | Build app for production and puts files to the `dist` folder      |
+| `npm run dev`         | Run app in the `development` mode and `dev` config  |
+| `npm run dev-https`   | Run app in the `development` mode and `dev` config using HTTPS protocol |
+| `npm run local`       | Run app in the `development` mode and `dev` config   |
+| `npm run prod`        | Run app in the `development` mode and `prod` config  |
+| `npm run build`       | Build app for production and puts files to the `dist` folder, default to `development` mode and `dev` config |
 | `npm run analyze`     | Analyze dependencies sizes and opens report in the browser        |
 | `npm run lint`        | Check code for lint errors                                        |
 | `npm run format`      | Format code using prettier                                        |
+| `npm run test`        | Run unit tests                                                    |
+| `npm run watch-tests` | Watch for file changes and run unit tests on changes              |
+| `npm run coverage`    | Generate test code coverage report                                |
 
 ## Local Deployment
 
 Inside the project folder run:
 
+- `nvm use 10.22.1;` - to use npm version: 10.22.1
 - `npm i` - install dependencies
-- `npm run dev` - run app in development mode
-- As this app can be loaded only inside a frame single-spa, you have to run a `micro-frontends-frame` frame app and configure it to use the URL `http://localhost:8503/topcoder-submission-review-app.js`.
+- `npm run local` - run app in `development` mode and `dev` config
+- This app will be loaded as a normal MFE app, its url is `http://localhost:8011/submission-review-app/topcoder-micro-frontends-submission-review-app.js` and is configurated in the config file of Earn App
 
-### Run Mock API server: [Mock server is not used for now]
+## Deployment to Production
 
-```bash
-cd local/mock-server
+- `npm i` - install dependencies
+- `APPMODE=production APPENV=prod npm run build` - build code to `dist/` folder
+- Now you can host `dist/` folder using any static server. For example, you may run a simple `Express` server by running `npm start`.
 
-npm install
+### Deploying to Heroku
 
-npm run start
-```
+Make sure you have [Heroky CLI](https://devcenter.heroku.com/articles/heroku-cli) installed and you have a Heroku account. And then inside the project folder run the next commands:
 
-This would host Mock API on http://local.topcoder-dev.com:8504.
+- If there is not Git repository inited yet, create a repo and commit all the files:
 
-## Verification
+  - `git init`
+  - `git add .`
+  - `git commit -m'inital commit'`
 
-Please check [verification.md](verification.md)
+- `heroku apps:create` - create Heroku app
+
+- `git push heroku master` - push changes to Heroku and trigger deploying
+
+- Now you have to configure frame app to use the URL provided by Heroku like `https://<APP-NAME>.herokuapp.com/submission-review-app/topcoder-micro-frontends-submission-review-app.js` to load this microapp.

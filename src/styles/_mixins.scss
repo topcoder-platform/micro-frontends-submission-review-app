@@ -1,55 +1,73 @@
-// reusable mixins
+$screen-sm: 768px !default;
+$screen-md: 1024px !default;
+$screen-lg: 1280px !default;
 
-@mixin rounded-card {
-    background-color: #ffffff;
-    border-radius: 8px;
+@mixin roboto-light {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
+
+@mixin roboto {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+@mixin roboto-medium {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+}
+
+@mixin roboto-bold {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
+
+@mixin upto-sm {
+  @media (max-width: #{$screen-sm - 1px}) {
+    @content;
   }
-  
-  @mixin font-roboto {
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+@mixin from-sm-to-lg {
+  @media (min-width: #{$screen-sm}) and (max-width: #{$screen-md}) {
+    @content;
   }
-  
-  @mixin font-barlow-condensed {
-    font-family: "Barlow Condensed", Arial, Helvetica, sans-serif;
+}
+
+@mixin md-to-lg {
+  @media (min-width: #{$screen-sm + 1px}) and (max-width: #{$screen-md}) {
+    @content;
   }
-  
-  @mixin font-barlow {
-    font-family: "Barlow", Arial, Helvetica, sans-serif;
+}
+
+@mixin xs-to-sm {
+  @media (max-width: #{$screen-sm}) {
+    @content;
   }
-  
-  
-  @mixin table {
-    width: 100%;
-  }
-  
-  @mixin table-row {
-    border-top: 1px solid #e9e9e9;
-    display: flex;
-    flex-direction: row;
-  
-    &:last-child {
-      border-bottom: 1px solid #e9e9e9;
-    }
-  }
-  
-  @mixin table-cell {
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    flex: 1 1 auto;
-    font-size: 14px;
-    line-height: 22px;
-    padding: 18px 8px 19px;
-    overflow-wrap: anywhere;
-  
-    a {
-      color: #0d61bf;
-      text-decoration: none;
-    }
-  }
-  
-  @mixin table-group {
-    display: flex;
-    align-items: center;
-  }
-  
+}
+
+@mixin primary-button {
+  background-color: $button-blue;
+  color: $white;
+  text-align: center;
+  text-decoration: none;
+  line-height: 21px;
+  font-size: 16px;
+  border-radius: 6px;
+  padding:  6px 6px;
+  width: 100%;
+  cursor: pointer;
+}
+
+@mixin secondary-button {
+  background-color: $white;
+  color: $button-blue;
+  text-align: center;
+  text-decoration: none;
+  line-height: 21px;
+  font-size: 16px;
+  border-radius: 6px;
+  padding:  6px 6px;
+  width: 100%;
+  cursor: pointer;
+}
