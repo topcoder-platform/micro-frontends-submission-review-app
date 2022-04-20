@@ -16,8 +16,8 @@ module.exports = (webpackConfigEnv) => {
   return webpackMerge.smart(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
     externals: {
-      "@topcoder/micro-frontends-navbar-app":
-        "@topcoder/micro-frontends-navbar-app",
+      "@topcoder/mfe-header":
+        "@topcoder/mfe-header",
     },
     module: {
       rules: [

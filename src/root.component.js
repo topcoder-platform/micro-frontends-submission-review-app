@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Router } from "@reach/router";
-// import { setAppMenu } from "@topcoder/micro-frontends-navbar-app";
+// import { setAppMenu } from "@topcoder/mfe-header";
 // import appMenu from "./constants/appMenu";
 import MyChallengesList from "./routes/MyChallengesList";
 import ChallengeDetails from "./routes/ChallengeDetails";
